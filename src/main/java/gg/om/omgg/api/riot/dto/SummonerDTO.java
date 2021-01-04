@@ -1,4 +1,4 @@
-package gg.om.omgg.web.dto;
+package gg.om.omgg.api.riot.dto;
 
 import lombok.*;
 
