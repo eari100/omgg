@@ -3,13 +3,13 @@ package gg.om.omgg.api.riot.dto;
 import lombok.*;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class SummonerDTO {
-    private final String accountId;
-    private final int profileIconId;
-    private final long revisionDate;
-    private final String name;
-    private final String id;
-    private final String puuid;
-    private final long summonerLevel;
+    private String accountId;
+    private int profileIconId;
+    private long revisionDate;
+    private String name;
+    private String id;
+    private String puuid;
+    private long summonerLevel;
 }
