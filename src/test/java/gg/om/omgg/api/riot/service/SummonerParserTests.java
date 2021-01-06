@@ -11,6 +11,7 @@ public class SummonerParserTests {
         SummonerDTO dto = new SummonerDTO();
 
         dto = parser.getJSONData("거세짱123");
+        assertThat(dto.getName()).isEqualTo("거세짱123");
         assertThat(dto.getId()).isEqualTo("qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI");
         assertThat(dto.getAccountId()).isEqualTo("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr");
         assertThat(dto.getPuuid()).isEqualTo("blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ");
