@@ -48,6 +48,12 @@ public class RiotApiControllerTests {
 
         List<Summoner> all = summonerRepository.findAll();
         assertThat(all.get(0).getName()).isEqualTo("거세짱123");
+        assertThat(all.get(0).getId()).isEqualTo("qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI");
+        assertThat(all.get(0).getAccountId()).isEqualTo("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr");
+        assertThat(all.get(0).getPuuid()).isEqualTo("blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ");
+        assertThat(all.get(0).getProfileIconId()).isEqualTo(11);
+        assertThat(all.get(0).getRevisionDate()).isEqualTo(1609294136000L);
+        assertThat(all.get(0).getSummonerLevel()).isEqualTo(294);
     }
 
 }
