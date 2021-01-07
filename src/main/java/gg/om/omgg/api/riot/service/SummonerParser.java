@@ -10,9 +10,11 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class SummonerParser {
     public SummonerDTO getJSONData(String name) {
         ObjectMapper objectMapper = new ObjectMapper();
