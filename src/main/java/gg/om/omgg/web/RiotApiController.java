@@ -3,12 +3,9 @@ package gg.om.omgg.web;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.api.riot.service.SummonerParser;
 import gg.om.omgg.api.riot.service.SummonerService;
+import gg.om.omgg.dto.SummonerResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,5 +19,10 @@ public class RiotApiController {
 
         summonerDTO = summonerParser.getJSONData(summonerName);
         summonerService.save(summonerDTO);
+    }
+
+    @GetMapping("/lol/summoners/by-name/{summonerName}")
+    public SummonerResponseDTO findByName(@PathVariable("summonerName") String summonerName) {
+        return summonerService.findByName(summonerName);
     }
 }
