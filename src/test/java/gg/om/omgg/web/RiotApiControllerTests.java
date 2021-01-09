@@ -15,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -38,27 +36,7 @@ public class RiotApiControllerTests {
     }
 
     @Test
-    public void Summoner_등록() throws Exception {
-        SummonerDTO summonerDTO = new SummonerDTO();
-
-        String url = "http://localhost:" + port + "/lol/summoners/by-name/거세짱123";
-
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, summonerDTO, void.class);
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        List<Summoner> all = summonerRepository.findAll();
-        assertThat(all.get(0).getName()).isEqualTo("거세짱123");
-        assertThat(all.get(0).getId()).isEqualTo("qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI");
-        assertThat(all.get(0).getAccountId()).isEqualTo("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr");
-        assertThat(all.get(0).getPuuid()).isEqualTo("blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ");
-        assertThat(all.get(0).getProfileIconId()).isEqualTo(11);
-        assertThat(all.get(0).getRevisionDate()).isEqualTo(1609294136000L);
-        assertThat(all.get(0).getSummonerLevel()).isEqualTo(294);
-    }
-
-    @Test
-    public void Summoner_이름_검색() throws Exception {
+    public void 이름으로_소환사_찾기_case_DB에_정보_존재() throws Exception {
 
         String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
         int profileIconId = 11;
@@ -80,6 +58,37 @@ public class RiotApiControllerTests {
         );
 
         String url = "http://localhost:" + port + "/lol/summoners/by-name/거세짱123";
+
+        ResponseEntity responseEntity = restTemplate.getForEntity(url, Object.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        System.out.println(responseEntity.getBody());
+    }
+
+    @Test
+    public void 이름으로_소환사_찾기_case_DB에_정보_없음() throws Exception {
+
+        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        int profileIconId = 11;
+        long revisionDate = 1609294136000L;
+        String name = "거세짱123";
+        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
+        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        long summonerLevel = 294;
+
+        String url = "http://localhost:" + port + "/lol/summoners/by-name/거세짱123";
+
+        ResponseEntity responseEntity = restTemplate.getForEntity(url, Object.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        System.out.println(responseEntity.getBody());
+    }
+
+    @Test
+    public void 이름으로_소환사_찾기_case_존재하지않는_소환사_검색() throws Exception {
+        String url = "http://localhost:" + port + "/lol/summoners/by-name/거세짱999";
 
         ResponseEntity responseEntity = restTemplate.getForEntity(url, Object.class);
 

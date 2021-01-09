@@ -1,8 +1,5 @@
 package gg.om.omgg.domain.summoner;
 
-import gg.om.omgg.api.riot.dto.SummonerDTO;
-import gg.om.omgg.api.riot.service.SummonerParser;
-import gg.om.omgg.dto.SummonerResponseDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -81,13 +79,13 @@ public class SummonerRepositoryTests {
                 .build()
         );
 
-        Summoner summoner = summonerRepository.findByName("거세짱123");
-        assertThat(summoner.getAccountId()).isEqualTo(accountId);
-        //assertThat(summoner.getProfileIconId()).isEqualTo(profileIconId);
-        assertThat(summoner.getRevisionDate()).isEqualTo(revisionDate);
-        assertThat(summoner.getName()).isEqualTo(name);
-        assertThat(summoner.getId()).isEqualTo(id);
-        assertThat(summoner.getPuuid()).isEqualTo(puuid);
-        //assertThat(summoner.getSummonerLevel()).isEqualTo(summonerLevel);
+        Optional<Summoner> summoner = summonerRepository.findByName("거세짱123");
+        assertThat(summoner.get().getAccountId()).isEqualTo(accountId);
+        //assertThat(summoner.get().getProfileIconId()).isEqualTo(profileIconId);
+        assertThat(summoner.get().getRevisionDate()).isEqualTo(revisionDate);
+        assertThat(summoner.get().getName()).isEqualTo(name);
+        assertThat(summoner.get().getId()).isEqualTo(id);
+        assertThat(summoner.get().getPuuid()).isEqualTo(puuid);
+        //assertThat(summoner.get().getSummonerLevel()).isEqualTo(summonerLevel);
     }
 }
