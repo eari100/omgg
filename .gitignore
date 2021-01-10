@@ -4,6 +4,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+### api key가 github에 노출되면 안되서 ###
+**/src/main/java/gg/om/omgg/api/riot/Key.java
 
 ### STS ###
 .apt_generated
