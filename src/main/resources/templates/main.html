@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>OMGG</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <form>
+            <h1>OMGG</h1>
+            <input type="input" id="name">
+            <button type="submit" id="btn-find">검색</button>
+        </form>
+        <th:block th:replace="fragment/footer :: commonFooter"></th:block>
+        <script src="js/main.js"></script>
+    </div>
+</body>
+</html>
