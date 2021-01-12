@@ -6,8 +6,8 @@ var main = {
         })
     },
     findByName : function() {
-        var data = $('#name').val()
-        alert('입력 값은 '+data+'입니다')
+        var name = $('#name').val()
+        window.location.href = '/userName='+name
     }
 }
 
