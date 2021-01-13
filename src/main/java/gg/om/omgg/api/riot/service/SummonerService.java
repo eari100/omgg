@@ -18,18 +18,19 @@ public class SummonerService {
     @Transactional
     public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
 
-    public SummonerResponseDTO findByName(String name) {
+    @Transactional
+    public Optional<SummonerResponseDTO> findByName(String name) {
         Optional<Summoner> result = summonerRepository.findByName(name);
         if(result.isEmpty()) {
             Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
             if(JSONData.isEmpty()) {
-                return new SummonerResponseDTO(new Summoner());
+                return Optional.empty();
             } else {
                 save(JSONData.get());
-                return new SummonerResponseDTO(summonerRepository.findByName(name).get());
+                return Optional.of(new SummonerResponseDTO(summonerRepository.findByName(name).get()));
             }
         } else {
-            return new SummonerResponseDTO(result.get());
+            return Optional.of(new SummonerResponseDTO(result.get()));
         }
     }
 }
