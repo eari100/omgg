@@ -4,9 +4,16 @@ var main = {
         $('#btn-find').on('click', function() {
             _this.findByName()
         })
+
+        $('#summonerName').keydown(function(key) {
+            if (key.keyCode == 13) {
+                _this.findByName()
+                return false
+            }
+        })
     },
     findByName : function() {
-        var name = $('#name').val()
+        var name = $('#summonerName').val()
         window.location.href = '/userName='+name
     }
 }
