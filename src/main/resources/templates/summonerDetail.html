@@ -6,8 +6,13 @@
 </head>
 <body>
 <form>
-    <img src="" width="300px" height="300px">
-    <h1>소환사 정보</h1>
+    <th:block th:unless="${summoner.isEmpty()}">
+        <img th:src="'http://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/'+${summoner.get().profileIconId}+'.png'" width="300px" height="300px">
+        <h1>소환사 정보</h1>
+    </th:block>
+    <th:block th:if="${summoner.isEmpty()}">
+        <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>
+    </th:block>
 </form>
 <th:block th:replace="fragment/footer :: commonFooter"></th:block>
 </body>
