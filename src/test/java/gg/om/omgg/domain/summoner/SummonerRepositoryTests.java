@@ -88,4 +88,32 @@ public class SummonerRepositoryTests {
         assertThat(summoner.get().getPuuid()).isEqualTo(puuid);
         //assertThat(summoner.get().getSummonerLevel()).isEqualTo(summonerLevel);
     }
+
+    @Test
+    public void summoner_삭제() {
+        // 초기값 세팅
+        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        int profileIconId = 11;
+        long revisionDate = 1609294136000L;
+        String name = "거세짱123";
+        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
+        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        long summonerLevel = 294;
+
+        summonerRepository.save(Summoner.builder()
+                .accountId(accountId)
+                .profileIconId(profileIconId)
+                .revisionDate(revisionDate)
+                .name(name)
+                .id(id)
+                .puuid(puuid)
+                .summonerLevel(summonerLevel)
+                .build()
+        );
+
+        summonerRepository.deleteById(id);
+
+        Optional<Summoner> summoner = summonerRepository.findById(id);
+        assertThat(summoner.isEmpty()).isEqualTo(true);
+    }
 }
