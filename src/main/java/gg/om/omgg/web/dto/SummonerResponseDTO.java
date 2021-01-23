@@ -1,4 +1,4 @@
-package gg.om.omgg.dto;
+package gg.om.omgg.web.dto;
 
 import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
