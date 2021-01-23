@@ -3,8 +3,6 @@ package gg.om.omgg.api.riot.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gg.om.omgg.api.riot.Key;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
-import gg.om.omgg.domain.summoner.Summoner;
-import gg.om.omgg.dto.SummonerResponseDTO;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
