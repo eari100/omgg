@@ -33,4 +33,17 @@ public class SummonerService {
             return Optional.of(new SummonerResponseDTO(result.get()));
         }
     }
+
+    @Transactional
+    public Optional<SummonerResponseDTO> renewData(String name, String id) {
+
+        summonerRepository.deleteById(id);
+
+        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
+        if( !JSONData.isEmpty() ) {
+            summonerRepository.save(JSONData.get().toEntity());
+        }
+
+        return findByName(name);
+    }
 }
