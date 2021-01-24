@@ -9,12 +9,16 @@
     <th:block th:unless="${summoner.isEmpty()}">
         <img th:src="'http://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/'+${summoner.get().profileIconId}+'.png'" width="300px" height="300px">
         <h3 th:text="'LV:'+${summoner.get().summonerLevel}">LV:30</h3>
+        <input type="hidden" id="summonerId" th:value="${summoner.get().id}">
+        <input type="hidden" id="summonerName" th:value="${summoner.get().name}">
         <h1 th:text="${summoner.get().name}">김소환사</h1>
+        <button type="button" id="btn-refresh">전적갱신</button>
     </th:block>
     <th:block th:if="${summoner.isEmpty()}">
         <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>
     </th:block>
 </form>
 <th:block th:replace="fragment/footer :: commonFooter"></th:block>
+<script src="js/summonerDetail.js"></script>
 </body>
 </html>
