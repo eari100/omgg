@@ -1,7 +1,7 @@
 package gg.om.omgg.web;
 
 import gg.om.omgg.api.riot.service.SummonerService;
-import gg.om.omgg.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

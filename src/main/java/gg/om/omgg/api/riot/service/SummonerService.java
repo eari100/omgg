@@ -3,7 +3,7 @@ package gg.om.omgg.api.riot.service;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
-import gg.om.omgg.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +32,18 @@ public class SummonerService {
         } else {
             return Optional.of(new SummonerResponseDTO(result.get()));
         }
+    }
+
+    @Transactional
+    public Optional<SummonerResponseDTO> renewData(String name, String id) {
+
+        summonerRepository.deleteById(id);
+
+        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
+        if( !JSONData.isEmpty() ) {
+            summonerRepository.save(JSONData.get().toEntity());
+        }
+
+        return findByName(name);
     }
 }

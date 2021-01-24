@@ -100,6 +100,6 @@ public class mainControllerTests {
         String url = "http://localhost:" + port + "/userName=거세짱999킹재욱";
 
         String body = this.restTemplate.getForObject(url, String.class);
-        assertThat(body).contains("OP.GG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.");
+        assertThat(body).contains("OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.");
     }
 }
