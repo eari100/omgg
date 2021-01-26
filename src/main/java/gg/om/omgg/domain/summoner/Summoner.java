@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Summoner {
+public class Summoner implements Serializable {
     @Id@Column(length=56)
     private String id;
-    @Column(length=56)
+    @Column(name="account_id", length=56)
     private String accountId;
     private int profileIconId;
     private long revisionDate;
