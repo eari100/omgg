@@ -1,9 +1,8 @@
-package gg.om.omgg.domain.summoner;
+package gg.om.omgg.domain.match;
 
-import gg.om.omgg.domain.match.Match;
-import gg.om.omgg.domain.match.MatchId;
-import gg.om.omgg.domain.match.MatchRepository;
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+
+import gg.om.omgg.domain.summoner.Summoner;
+import gg.om.omgg.domain.summoner.SummonerRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
