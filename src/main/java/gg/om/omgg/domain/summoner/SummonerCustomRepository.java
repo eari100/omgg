@@ -5,5 +5,5 @@ import gg.om.omgg.web.dto.SummonerResponseDTO;
 import java.util.List;
 
 public interface SummonerCustomRepository {
-    List<SummonerResponseDTO> findSummonerIntegrationInformation();
+    List<SummonerResponseDTO> findSummonerIntegrationInformationByName(String summonerName);
 }

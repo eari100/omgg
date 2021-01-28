@@ -14,10 +14,11 @@ public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<SummonerResponseDTO> findSummonerIntegrationInformation() {
+    public List<SummonerResponseDTO> findSummonerIntegrationInformationByName(String summonerName) {
         List<Match> matches = queryFactory
                 .selectFrom(QMatch.match)
                 .leftJoin(QMatch.match.id.summoner, QSummoner.summoner).fetchJoin()
+                .where(QMatch.match.id.summoner.name.eq(summonerName))
                 .fetch();
 
         return matches.stream()
