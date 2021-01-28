@@ -169,7 +169,7 @@ public class SummonerRepositoryTests {
         }
 
         // when
-        List<SummonerResponseDTO> matchList = summonerRepository.findSummonerIntegrationInformation();
+        List<SummonerResponseDTO> matchList = summonerRepository.findSummonerIntegrationInformationByName(name);
 
         // then
         assertThat(matchList.size()).isEqualTo(20);
