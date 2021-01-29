@@ -13,14 +13,14 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Embeddable
-public class MatchId implements Serializable {
+public class MatchReferenceId implements Serializable {
     @ManyToOne
     @JoinColumn(name="account_id", referencedColumnName ="account_id")
     private Summoner summoner;
     private long gameId;
 
     @Builder
-    public MatchId(Summoner summoner, Long gameId) {
+    public MatchReferenceId(Summoner summoner, Long gameId) {
         this.summoner = summoner;
         this.gameId = gameId;
     }

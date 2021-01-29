@@ -16,16 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MatchRepositoryTests {
+public class MatchReferenceRepositoryTests {
 
     @Autowired
-    MatchRepository matchRepository;
+    MatchReferenceRepository matchReferenceRepository;
     @Autowired
     SummonerRepository summonerRepository;
 
     @After
     public void cleanUp() {
-        matchRepository.deleteAll();
+        matchReferenceRepository.deleteAll();
         summonerRepository.deleteAll();
     }
 
@@ -55,9 +55,9 @@ public class MatchRepositoryTests {
         // fk 제약조건 때문에 미리 저장
         summonerRepository.save(summoner);
 
-        matchRepository.save(Match.builder()
+        matchReferenceRepository.save(MatchReference.builder()
                 .id(
-                        MatchId.builder()
+                        MatchReferenceId.builder()
                         .summoner(summoner)
                         .gameId(gameId)
                         .build()
@@ -65,9 +65,9 @@ public class MatchRepositoryTests {
                 .build()
         );
 
-        List<Match> matchList = matchRepository.findAll();
-        Match match = matchList.get(0);
-        assertThat(match.getId().getSummoner().getAccountId()).isEqualTo(accountId);
-        assertThat(match.getId().getGameId()).isEqualTo(gameId);
+        List<MatchReference> matchReferenceList = matchReferenceRepository.findAll();
+        MatchReference matchReference = matchReferenceList.get(0);
+        assertThat(matchReference.getId().getSummoner().getAccountId()).isEqualTo(accountId);
+        assertThat(matchReference.getId().getGameId()).isEqualTo(gameId);
     }
 }

@@ -11,12 +11,12 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Match implements Serializable {
+public class MatchReference implements Serializable {
     @EmbeddedId
-    private MatchId id;
+    private MatchReferenceId id;
 
     @Builder
-    public Match(MatchId id) {
+    public MatchReference(MatchReferenceId id) {
         this.id = id;
     }
 }

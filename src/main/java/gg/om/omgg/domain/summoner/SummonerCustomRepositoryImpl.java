@@ -1,8 +1,8 @@
 package gg.om.omgg.domain.summoner;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import gg.om.omgg.domain.match.Match;
-import gg.om.omgg.domain.match.QMatch;
+import gg.om.omgg.domain.match.MatchReference;
+import gg.om.omgg.domain.match.QMatchReference;
 import gg.om.omgg.web.dto.SummonerResponseDTO;
 import lombok.RequiredArgsConstructor;
 
@@ -15,13 +15,13 @@ public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
 
     @Override
     public List<SummonerResponseDTO> findSummonerIntegrationInformationByName(String summonerName) {
-        List<Match> matches = queryFactory
-                .selectFrom(QMatch.match)
-                .leftJoin(QMatch.match.id.summoner, QSummoner.summoner).fetchJoin()
-                .where(QMatch.match.id.summoner.name.eq(summonerName))
+        List<MatchReference> matchReferences = queryFactory
+                .selectFrom(QMatchReference.matchReference)
+                .leftJoin(QMatchReference.matchReference.id.summoner, QSummoner.summoner).fetchJoin()
+                .where(QMatchReference.matchReference.id.summoner.name.eq(summonerName))
                 .fetch();
 
-        return matches.stream()
+        return matchReferences.stream()
                 .map(m -> new SummonerResponseDTO(m.getId().getSummoner()))
                 .collect(Collectors.toList());
     }

@@ -1,8 +1,8 @@
 package gg.om.omgg.domain.summoner;
 
-import gg.om.omgg.domain.match.Match;
-import gg.om.omgg.domain.match.MatchId;
-import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.match.MatchReference;
+import gg.om.omgg.domain.match.MatchReferenceId;
+import gg.om.omgg.domain.match.MatchReferenceRepository;
 import gg.om.omgg.web.dto.SummonerResponseDTO;
 import org.junit.After;
 import org.junit.Test;
@@ -24,11 +24,11 @@ public class SummonerRepositoryTests {
     SummonerRepository summonerRepository;
 
     @Autowired
-    private MatchRepository matchRepository;
+    private MatchReferenceRepository matchReferenceRepository;
 
     @After
     public void cleanUp() {
-        matchRepository.deleteAll();
+        matchReferenceRepository.deleteAll();
         summonerRepository.deleteAll();
     }
 
@@ -157,9 +157,9 @@ public class SummonerRepositoryTests {
         summonerRepository.save(summoner);
 
         for(long gameId : gameIds) {
-            matchRepository.save(Match.builder()
+            matchReferenceRepository.save(MatchReference.builder()
                     .id(
-                            MatchId.builder()
+                            MatchReferenceId.builder()
                                     .summoner(summoner)
                                     .gameId(gameId)
                                     .build()
