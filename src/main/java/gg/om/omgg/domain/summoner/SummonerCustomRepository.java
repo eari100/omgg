@@ -1,9 +1,9 @@
 package gg.om.omgg.domain.summoner;
 
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 
 import java.util.List;
 
 public interface SummonerCustomRepository {
-    List<SummonerResponseDTO> findSummonerIntegrationInformationByName(String summonerName);
+    List<SummonerIntegrationInformationResponseDTO> findSummonerIntegrationInformationByName(String summonerName);
 }

@@ -2,7 +2,7 @@ package gg.om.omgg.web;
 
 import gg.om.omgg.api.riot.service.SummonerService;
 import gg.om.omgg.web.dto.RenewRequestDTO;
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ public class RiotApiController {
     private final SummonerService summonerService;
 
     @PostMapping("/api/renew")
-    public Optional<SummonerResponseDTO> selectDetail(@RequestBody RenewRequestDTO requestDTO) {
+    public Optional<SummonerIntegrationInformationResponseDTO> selectDetail(@RequestBody RenewRequestDTO requestDTO) {
         return summonerService.renewData(requestDTO.getName(), requestDTO.getId());
     }
 }

@@ -4,13 +4,13 @@ import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
 
 @Getter
-public class SummonerResponseDTO {
+public class SummonerIntegrationInformationResponseDTO {
     private int profileIconId;
     private String name;
     private long summonerLevel;
     private String id;
 
-    public SummonerResponseDTO(Summoner entity) {
+    public SummonerIntegrationInformationResponseDTO(Summoner entity) {
         this.profileIconId = entity.getProfileIconId();
         this.name = entity.getName();
         this.summonerLevel = entity.getSummonerLevel();

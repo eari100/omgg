@@ -3,7 +3,7 @@ package gg.om.omgg.domain.summoner;
 import gg.om.omgg.domain.match.MatchReference;
 import gg.om.omgg.domain.match.MatchReferenceId;
 import gg.om.omgg.domain.match.MatchReferenceRepository;
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -169,7 +169,7 @@ public class SummonerRepositoryTests {
         }
 
         // when
-        List<SummonerResponseDTO> matchList = summonerRepository.findSummonerIntegrationInformationByName(name);
+        List<SummonerIntegrationInformationResponseDTO> matchList = summonerRepository.findSummonerIntegrationInformationByName(name);
 
         // then
         assertThat(matchList.size()).isEqualTo(20);

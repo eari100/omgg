@@ -1,7 +1,7 @@
 package gg.om.omgg.web;
 
 import gg.om.omgg.api.riot.service.SummonerService;
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class mainController {
     @GetMapping("/userName={name}")
     public String selectDetail(Model model, @PathVariable("name") String summonerName) {
 
-        Optional<SummonerResponseDTO> dto = summonerService.findByName(summonerName);
+        Optional<SummonerIntegrationInformationResponseDTO> dto = summonerService.findByName(summonerName);
 
         model.addAttribute("summoner", dto);
 
