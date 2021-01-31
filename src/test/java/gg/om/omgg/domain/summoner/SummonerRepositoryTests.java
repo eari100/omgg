@@ -126,7 +126,7 @@ public class SummonerRepositoryTests {
     }
 
     @Test
-    public void QuerydslLeftJoin_summoner_and_match() {
+    public void Querydsl_Join_summoner_and_match() {
         // given
         String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
         int profileIconId = 11;
