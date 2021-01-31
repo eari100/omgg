@@ -17,8 +17,10 @@ public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
     public List<SummonerIntegrationInformationResponseDTO> findSummonerIntegrationInformationByName(String summonerName) {
         List<MatchReference> matchReferences = queryFactory
                 .selectFrom(QMatchReference.matchReference)
-                .leftJoin(QMatchReference.matchReference.id.summoner, QSummoner.summoner).fetchJoin()
+                .rightJoin(QMatchReference.matchReference.id.summoner, QSummoner.summoner).fetchJoin()
                 .where(QMatchReference.matchReference.id.summoner.name.eq(summonerName))
+                .offset(0)
+                .limit(20)
                 .fetch();
 
         return matchReferences.stream()
