@@ -24,7 +24,7 @@ public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
                 .fetch();
 
         return matchReferences.stream()
-                .map(m -> new SummonerIntegrationInformationResponseDTO(m.getId().getSummoner()))
+                .map(m -> new SummonerIntegrationInformationResponseDTO(m))
                 .collect(Collectors.toList());
     }
 }
