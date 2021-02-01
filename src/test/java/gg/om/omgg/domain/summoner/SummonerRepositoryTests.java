@@ -173,5 +173,9 @@ public class SummonerRepositoryTests {
 
         // then
         assertThat(matchList.size()).isEqualTo(20);
+
+        for(int i=0;i<gameIds.length;i++)
+            assertThat(matchList.get(i).getGameId()).isEqualTo(gameIds[i]);
+
     }
 }
