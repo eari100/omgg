@@ -4,9 +4,6 @@ import gg.om.omgg.domain.match.MatchReference;
 import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 public class SummonerIntegrationInformationResponseDTO {
     private int profileIconId;
