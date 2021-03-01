@@ -128,8 +128,7 @@ public class MatchReferenceRepositoryTests {
         int gameId_index = 0;
         for(MatchReference matchReference : selectMatchReferenceList) {
             assertThat(matchReference.getId().getSummoner().getAccountId()).isEqualTo(accountId);
-            assertThat(matchReference.getId().getGameId()).isEqualTo(gameIds[gameId_index]);
-            ++gameId_index;
+            assertThat(matchReference.getId().getGameId()).isEqualTo(gameIds[gameId_index++]);
         }
     }
 
