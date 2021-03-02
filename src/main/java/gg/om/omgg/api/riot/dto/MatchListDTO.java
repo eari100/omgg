@@ -1,8 +1,12 @@
 package gg.om.omgg.api.riot.dto;
 
+import gg.om.omgg.domain.match.MatchReference;
+import gg.om.omgg.domain.match.MatchReferenceId;
+import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,4 +16,23 @@ public class MatchListDTO {
     private int totalGames;
     private int endIndex;
     private List<MatchReferenceDTO> matches;
+
+    public List<MatchReference> toEntity(Summoner summoner) {
+        List<MatchReference> matchReferenceList = new ArrayList<>();
+
+        for(int i=0;i<matches.size();i++) {
+            matchReferenceList.add(
+                    MatchReference.builder()
+                    .id(
+                            MatchReferenceId.builder()
+                                    .summoner(summoner)
+                                    .gameId(matches.get(i).getGameId())
+                                    .build()
+                    )
+                    .build()
+            );
+        }
+
+        return matchReferenceList;
+    }
 }
