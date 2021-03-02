@@ -1,5 +1,6 @@
 package gg.om.omgg.web;
 
+import gg.om.omgg.domain.match.MatchReferenceRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.RenewRequestDTO;
@@ -33,8 +34,12 @@ public class RiotApiControllerTests {
     @Autowired
     private SummonerRepository summonerRepository;
 
+    @Autowired
+    private MatchReferenceRepository matchReferenceRepository;
+
     @After
     public void tearDown() throws Exception {
+        matchReferenceRepository.deleteAll();
         summonerRepository.deleteAll();
     }
 
