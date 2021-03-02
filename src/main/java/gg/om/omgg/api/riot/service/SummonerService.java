@@ -1,10 +1,12 @@
 package gg.om.omgg.api.riot.service;
 
+import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
+    @Autowired
+    private final MatchReferenceService matchReferenceService;
     @Transactional
     public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
 
@@ -22,11 +26,11 @@ public class SummonerService {
     public Optional<SummonerIntegrationInformationResponseDTO> findByName(String name) {
         Optional<Summoner> result = summonerRepository.findByName(name);
         if(result.isEmpty()) {
-            Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-            if(JSONData.isEmpty()) {
+            Optional<SummonerDTO> summonerToJSON = summonerParser.getJSONData(name);
+            if(summonerToJSON.isEmpty()) {
                 return Optional.empty();
             } else {
-                save(JSONData.get());
+                save(summonerToJSON.get());
                 return Optional.of(new SummonerIntegrationInformationResponseDTO(summonerRepository.findByName(name).get()));
             }
         } else {
@@ -39,9 +43,14 @@ public class SummonerService {
 
         summonerRepository.deleteById(id);
 
-        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        if( !JSONData.isEmpty() ) {
-            summonerRepository.save(JSONData.get().toEntity());
+        Optional<SummonerDTO> summonerToJSON = summonerParser.getJSONData(name);
+        if( !summonerToJSON.isEmpty() ) {
+            summonerRepository.save(summonerToJSON.get().toEntity());
+
+            MatchListParser matchListParser = new MatchListParser();
+            Optional<MatchListDTO> MatchListToJSON = matchListParser.getJSONData(summonerToJSON.get().getAccountId());
+
+            matchReferenceService.saveAll(MatchListToJSON.get(), summonerToJSON.get().toEntity());
         }
 
         return findByName(name);
