@@ -1,5 +1,7 @@
 package gg.om.omgg.web;
 
+import gg.om.omgg.domain.match.MatchReference;
+import gg.om.omgg.domain.match.MatchReferenceId;
 import gg.om.omgg.domain.match.MatchReferenceRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
@@ -51,9 +53,16 @@ public class RiotApiControllerTests {
         String name = "거세짱123";
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
         String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
-        long summonerLevel = 290;
+        long summonerLevel = 290L;
 
-        summonerRepository.save(Summoner.builder()
+        long[] gameIds = {
+                4954204682L, 4954109151L, 4951865595L, 4951709489L, 4951119896L,
+                4950311540L, 4949572489L, 4949471123L, 4949055012L, 4948045142L,
+                4947938785L, 4947838960L, 4947852300L, 4946666634L, 4946590274L,
+                4946361968L, 4944515686L, 4943127213L, 4943131472L, 4943037678L
+        };
+
+        Summoner summoner = Summoner.builder()
                 .accountId(accountId)
                 .profileIconId(profileIconId)
                 .revisionDate(revisionDate)
@@ -61,8 +70,21 @@ public class RiotApiControllerTests {
                 .id(id)
                 .puuid(puuid)
                 .summonerLevel(summonerLevel)
-                .build()
-        );
+                .build();
+
+        summonerRepository.save(summoner);
+
+        for(long gameId : gameIds) {
+            matchReferenceRepository.save(MatchReference.builder()
+                    .id(
+                            MatchReferenceId.builder()
+                                    .summoner(summoner)
+                                    .gameId(gameId)
+                                    .build()
+                    )
+                    .build()
+            );
+        }
 
         RenewRequestDTO requestDto = RenewRequestDTO.builder()
                 .id(id)
@@ -81,42 +103,5 @@ public class RiotApiControllerTests {
         assertThat(all.get(0).getName()).isEqualTo(name);
         assertThat(all.get(0).getId()).isEqualTo(id);
         assertThat(all.get(0).getPuuid()).isEqualTo(puuid);
-    }
-
-    @Test
-    public void summoner_갱신_case_만약_소환사_이름이_바꼈을때() throws Exception {
-        String accountId = "Ih71S9n9QHH6jtIVOch_ahuOw6z-LDjVMVZ7wEukeSyw";
-        int profileIconId = 4834;
-        long revisionDate = 1610525078000L;
-        String name = "jooGosu"; // 예전 소환사명
-        String id = "tdFWSOiOLgAZikScgZgUH_AhMnlfGmUwCcn4eWYkamkKQfo";
-        String puuid = "gBuJoXbuKp6WOKu6ajO7g_tycL57HU3ugsinPRoTZzrqgQOefbri7xloSHX7dATOYgFwvjhEXrgXAQ";
-        long summonerLevel = 255;
-
-        summonerRepository.save(Summoner.builder()
-                .accountId(accountId)
-                .profileIconId(profileIconId)
-                .revisionDate(revisionDate)
-                .name(name)
-                .id(id)
-                .puuid(puuid)
-                .summonerLevel(summonerLevel)
-                .build()
-        );
-
-        RenewRequestDTO requestDto = RenewRequestDTO.builder()
-                .id(id)
-                .name(name)
-                .build();
-
-        HttpEntity<RenewRequestDTO> requestEntity = new HttpEntity<>(requestDto);
-
-        String url = "http://localhost:" + port + "/api/renew";
-
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, requestEntity, Object.class);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        Optional<Summoner> oldSummoner = summonerRepository.findByName(name);
-        assertThat(oldSummoner.isEmpty()).isEqualTo(true);
     }
 }
