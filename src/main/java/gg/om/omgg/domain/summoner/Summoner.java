@@ -34,4 +34,13 @@ public class Summoner implements Serializable {
         this.puuid = puuid;
         this.summonerLevel = summonerLevel;
     }
+
+    public void update(String accountId, int profileIconId, long revisionDate, String name, String puuid, long summonerLevel) {
+        this.accountId = accountId;
+        this.profileIconId = profileIconId;
+        this.revisionDate = revisionDate;
+        this.name = name;
+        this.puuid = puuid;
+        this.summonerLevel = summonerLevel;
+    }
 }
