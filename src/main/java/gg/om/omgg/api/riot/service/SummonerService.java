@@ -6,7 +6,6 @@ import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,7 +16,6 @@ import java.util.Optional;
 public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
-    @Autowired
     private final MatchReferenceService matchReferenceService;
     @Transactional
     public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
@@ -40,19 +38,27 @@ public class SummonerService {
 
     @Transactional
     public Optional<SummonerIntegrationInformationResponseDTO> renewData(String name, String id) {
-
-        summonerRepository.deleteById(id);
-
         Optional<SummonerDTO> summonerToJSON = summonerParser.getJSONData(name);
+
         if( !summonerToJSON.isEmpty() ) {
-            summonerRepository.save(summonerToJSON.get().toEntity());
-
+            update(id, summonerToJSON.get());
             MatchListParser matchListParser = new MatchListParser();
-            Optional<MatchListDTO> MatchListToJSON = matchListParser.getJSONData(summonerToJSON.get().getAccountId());
+            Optional<MatchListDTO> matchListToJSON = matchListParser.getJSONData(summonerToJSON.get().getAccountId());
 
-            matchReferenceService.saveAll(MatchListToJSON.get(), summonerToJSON.get().toEntity());
+            matchReferenceService.saveAll(matchListToJSON.get(), summonerToJSON.get().toEntity());
         }
 
         return findByName(name);
+    }
+
+    @Transactional
+    public String update(String id, SummonerDTO summonerDTO) {
+        Summoner summoner = summonerRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("해당 소환사가 존재하지 않습니다. id = "+id));
+        summoner.update(
+                summonerDTO.getAccountId(), summonerDTO.getProfileIconId(), summonerDTO.getRevisionDate(),
+                summonerDTO.getName(), summonerDTO.getPuuid(), summonerDTO.getSummonerLevel()
+        );
+        return id;
     }
 }
