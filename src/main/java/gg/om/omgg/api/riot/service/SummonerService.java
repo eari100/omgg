@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,23 +22,21 @@ public class SummonerService {
     public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
 
     @Transactional
-    public Optional<SummonerIntegrationInformationResponseDTO> findByName(String name) {
-        Optional<Summoner> result = summonerRepository.findByName(name);
+    public List<SummonerIntegrationInformationResponseDTO> findByName(String name) {
+        List<SummonerIntegrationInformationResponseDTO> result = summonerRepository.findSummonerIntegrationInformationByName(name);
+
         if(result.isEmpty()) {
             Optional<SummonerDTO> summonerToJSON = summonerParser.getJSONData(name);
-            if(summonerToJSON.isEmpty()) {
-                return Optional.empty();
-            } else {
+            if( !summonerToJSON.isEmpty() ) {
                 save(summonerToJSON.get());
-                return Optional.of(new SummonerIntegrationInformationResponseDTO(summonerRepository.findByName(name).get()));
+                return summonerRepository.findSummonerIntegrationInformationByName(name);
             }
-        } else {
-            return Optional.of(new SummonerIntegrationInformationResponseDTO(result.get()));
         }
+            return result;
     }
 
     @Transactional
-    public Optional<SummonerIntegrationInformationResponseDTO> renewData(String name, String id) {
+    public List<SummonerIntegrationInformationResponseDTO> renewData(String name, String id) {
         Optional<SummonerDTO> summonerToJSON = summonerParser.getJSONData(name);
 
         if( !summonerToJSON.isEmpty() ) {
