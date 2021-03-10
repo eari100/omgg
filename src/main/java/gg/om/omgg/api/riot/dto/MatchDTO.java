@@ -1,5 +1,6 @@
 package gg.om.omgg.api.riot.dto;
 
+import gg.om.omgg.domain.match.Match;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,13 @@ public class MatchDTO {
     private int mapId;
     private String gameMode;
     private List<ParticipantDTO> participants;
+
+    public Match toEntity(long gameId, int queueId, String platformId, int seasonId) {
+        return Match.builder()
+                .gameId(gameId)
+                .queueId(queueId)
+                .platformId(platformId)
+                .seasonId(seasonId)
+                .build();
+    }
 }
