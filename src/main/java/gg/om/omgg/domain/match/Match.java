@@ -4,12 +4,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor
 @Entity
 public class Match {
+    @Id
+    @Column(name="game_id")
     private long gameId;
     private int queueId;
     private String platformId;
