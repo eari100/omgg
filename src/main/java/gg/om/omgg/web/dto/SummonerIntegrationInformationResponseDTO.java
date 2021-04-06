@@ -1,6 +1,5 @@
 package gg.om.omgg.web.dto;
 
-import gg.om.omgg.domain.match.MatchReference;
 import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
 
@@ -18,14 +17,5 @@ public class SummonerIntegrationInformationResponseDTO {
         this.name = entity.getName();
         this.summonerLevel = entity.getSummonerLevel();
         this.id = entity.getId();
-    }
-
-    public SummonerIntegrationInformationResponseDTO(MatchReference matchReference) {
-        this.profileIconId = matchReference.getId().getSummoner().getProfileIconId();
-        this.name = matchReference.getId().getSummoner().getName();
-        this.summonerLevel = matchReference.getId().getSummoner().getSummonerLevel();
-        this.id = matchReference.getId().getSummoner().getId();
-
-        this.gameId = matchReference.getId().getGameId();
     }
 }

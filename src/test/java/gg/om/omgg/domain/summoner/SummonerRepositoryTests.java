@@ -1,8 +1,5 @@
 package gg.om.omgg.domain.summoner;
 
-import gg.om.omgg.domain.match.MatchReference;
-import gg.om.omgg.domain.match.MatchReferenceId;
-import gg.om.omgg.domain.match.MatchReferenceRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
@@ -23,12 +20,8 @@ public class SummonerRepositoryTests {
     @Autowired
     SummonerRepository summonerRepository;
 
-    @Autowired
-    private MatchReferenceRepository matchReferenceRepository;
-
     @After
     public void cleanUp() {
-        matchReferenceRepository.deleteAll();
         summonerRepository.deleteAll();
     }
 
@@ -123,59 +116,5 @@ public class SummonerRepositoryTests {
 
         Optional<Summoner> summoner = summonerRepository.findById(id);
         assertThat(summoner.isEmpty()).isEqualTo(true);
-    }
-
-    @Test
-    public void Querydsl_Join_summoner_and_match() {
-        // given
-        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
-        int profileIconId = 11;
-        long revisionDate = 1609294136000L;
-        String name = "거세짱123";
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
-        long summonerLevel = 300L;
-
-        long[] gameIds = {
-                4954204682L, 4954109151L, 4951865595L, 4951709489L, 4951119896L,
-                4950311540L, 4949572489L, 4949471123L, 4949055012L, 4948045142L,
-                4947938785L, 4947838960L, 4947852300L, 4946666634L, 4946590274L,
-                4946361968L, 4944515686L, 4943127213L, 4943131472L, 4943037678L
-        };
-
-        Summoner summoner = Summoner.builder()
-                .accountId(accountId)
-                .profileIconId(profileIconId)
-                .revisionDate(revisionDate)
-                .name(name)
-                .id(id)
-                .puuid(puuid)
-                .summonerLevel(summonerLevel)
-                .build();
-
-        // fk 제약조건 때문에 미리 저장
-        summonerRepository.save(summoner);
-
-        for(long gameId : gameIds) {
-            matchReferenceRepository.save(MatchReference.builder()
-                    .id(
-                            MatchReferenceId.builder()
-                                    .summoner(summoner)
-                                    .gameId(gameId)
-                                    .build()
-                    )
-                    .build()
-            );
-        }
-
-        // when
-        List<SummonerIntegrationInformationResponseDTO> matchList = summonerRepository.findSummonerIntegrationInformationByName(name);
-
-        // then
-        assertThat(matchList.size()).isEqualTo(20);
-
-        for(int i=0;i<gameIds.length;i++)
-            assertThat(matchList.get(i).getGameId()).isEqualTo(gameIds[i]);
-
     }
 }
