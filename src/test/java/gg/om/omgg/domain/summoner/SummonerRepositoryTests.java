@@ -1,6 +1,5 @@
 package gg.om.omgg.domain.summoner;
 
-import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
