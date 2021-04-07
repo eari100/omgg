@@ -25,6 +25,13 @@ public class Summoner implements Serializable {
     private String puuid;
     private long summonerLevel;
 
+    @OneToMany
+    @JoinTable(name="summoner_match",
+            joinColumns = @JoinColumn(name="account_id"),
+            inverseJoinColumns = @JoinColumn(name="game_id")
+    )
+    private List<Match> matches = new ArrayList<>();
+
     @Builder
     public Summoner(String id, String accountId, int profileIconId, long revisionDate, String name, String puuid, long summonerLevel) {
         this.id = id;
