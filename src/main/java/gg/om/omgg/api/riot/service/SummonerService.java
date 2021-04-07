@@ -46,4 +46,15 @@ public class SummonerService {
 
         return findByName(name);
     }
+
+    @Transactional
+    public String update(String id, Summoner requestDto) {
+        Summoner summoner = summonerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 소환사가 없습니다. id=" + id));
+
+        summoner.update(requestDto.getAccountId(), requestDto.getProfileIconId(), requestDto.getRevisionDate(),
+                requestDto.getName(), requestDto.getPuuid(), requestDto.getSummonerLevel());
+
+        return id;
+    }
 }
