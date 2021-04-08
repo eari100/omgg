@@ -12,13 +12,6 @@ public class SummonerIntegrationInformationResponseDTO {
     private String id;
     private long gameId;
 
-    public SummonerIntegrationInformationResponseDTO(Summoner entity) {
-        this.profileIconId = entity.getProfileIconId();
-        this.name = entity.getName();
-        this.summonerLevel = entity.getSummonerLevel();
-        this.id = entity.getId();
-    }
-
     public SummonerIntegrationInformationResponseDTO(Summoner summoner, Match match) {
         this.profileIconId = summoner.getProfileIconId();
         this.name = summoner.getName();
