@@ -3,6 +3,7 @@ package gg.om.omgg.domain.summoner;
 import gg.om.omgg.api.riot.service.SummonerService;
 import gg.om.omgg.domain.match.Match;
 import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -166,5 +167,14 @@ public class SummonerRepositoryTests {
             summoner.getMatches().add(match);
         }
         summonerRepository.save(summoner);
+
+        List<SummonerIntegrationInformationResponseDTO> matchsInfo = summonerRepository.findSummonerIntegrationInformationByName(name);
+        for(int i=0;i<matchsInfo.size();i++) {
+            assertThat(matchsInfo.get(i).getProfileIconId()).isEqualTo(profileIconId);
+            assertThat(matchsInfo.get(i).getName()).isEqualTo(name);
+            assertThat(matchsInfo.get(i).getSummonerLevel()).isEqualTo(summonerLevel);
+            assertThat(matchsInfo.get(i).getId()).isEqualTo(id);
+            assertThat(matchsInfo.get(i).getGameId()).isEqualTo(gameIds[i]);
+        }
     }
 }
