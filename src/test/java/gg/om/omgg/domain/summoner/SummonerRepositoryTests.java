@@ -126,7 +126,7 @@ public class SummonerRepositoryTests {
     }
 
     @Test
-    public void summoner이랑match에_저장하면_summoner_match에도_저장되는지_테스트() {
+    public void 데이터가_존재하는_findSummonerIntegrationInformationByName_조회테스트() {
         String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
         int profileIconId = 11;
         long revisionDate = 1609294136000L;
@@ -166,15 +166,22 @@ public class SummonerRepositoryTests {
             // 연관관계 추가
             summoner.getMatches().add(match);
         }
+        // summoner_match 데이터 삽입
         summonerRepository.save(summoner);
 
-        List<SummonerIntegrationInformationResponseDTO> matchsInfo = summonerRepository.findSummonerIntegrationInformationByName(name);
-        for(int i=0;i<matchsInfo.size();i++) {
-            assertThat(matchsInfo.get(i).getProfileIconId()).isEqualTo(profileIconId);
-            assertThat(matchsInfo.get(i).getName()).isEqualTo(name);
-            assertThat(matchsInfo.get(i).getSummonerLevel()).isEqualTo(summonerLevel);
-            assertThat(matchsInfo.get(i).getId()).isEqualTo(id);
-            assertThat(matchsInfo.get(i).getGameId()).isEqualTo(gameIds[i]);
-        }
+        SummonerIntegrationInformationResponseDTO result = summonerRepository.findSummonerIntegrationInformationByName(name);
+
+            assertThat(result.getProfileIconId()).isEqualTo(profileIconId);
+            assertThat(result.getName()).isEqualTo(name);
+            assertThat(result.getSummonerLevel()).isEqualTo(summonerLevel);
+            assertThat(result.getId()).isEqualTo(id);
+            for(int i=0;i<20;i++)
+                assertThat(result.getMatches().get(i).getGameId()).isEqualTo(gameIds[i]);
+    }
+
+    @Test
+    public void 데이터가_존재하지_않는_findSummonerIntegrationInformationByName_조회테스트() {
+        String name = "거세짱123";
+        summonerRepository.findSummonerIntegrationInformationByName(name);
     }
 }

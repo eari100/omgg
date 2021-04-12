@@ -1,34 +1,30 @@
 package gg.om.omgg.domain.summoner;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import gg.om.omgg.domain.match.QMatch;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 @RequiredArgsConstructor
 public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<SummonerIntegrationInformationResponseDTO> findSummonerIntegrationInformationByName(String summonerName) {
+    public SummonerIntegrationInformationResponseDTO findSummonerIntegrationInformationByName(String summonerName) {
         QSummoner summoner = QSummoner.summoner;
         QMatch match = QMatch.match;
 
-        List<Tuple> matchsInfo = queryFactory
-                .select(summoner, match)
-                .from(summoner)
-                .innerJoin(summoner.matches, match)
+        Summoner result = queryFactory
+                .selectFrom(summoner)
+                .leftJoin(summoner.matches, match).fetchJoin()
                 .where(summoner.name.eq(summonerName))
                 .offset(0)
                 .limit(20)
-                .fetch();
+                .fetchOne();
 
-        return matchsInfo.stream()
-                .map(m -> new SummonerIntegrationInformationResponseDTO(m.get(summoner), m.get(match)))
-                .collect(Collectors.toList());
+        return new SummonerIntegrationInformationResponseDTO(result);
     }
 }

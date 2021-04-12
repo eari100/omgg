@@ -6,9 +6,7 @@ import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -16,16 +14,14 @@ import java.util.Optional;
 public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
-    @Transactional
-    public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
 
     @Transactional
-    public List<SummonerIntegrationInformationResponseDTO> findByName(String name) {
-        List<SummonerIntegrationInformationResponseDTO> result = summonerRepository.findSummonerIntegrationInformationByName(name);
-        if(result.isEmpty()) {
+    public SummonerIntegrationInformationResponseDTO findByName(String name) {
+        SummonerIntegrationInformationResponseDTO result = summonerRepository.findSummonerIntegrationInformationByName(name);
+        if(result==null) {
             Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-            if (!JSONData.isEmpty()) {
-                save(JSONData.get());
+            if(JSONData.isPresent()) {
+                summonerRepository.save(JSONData.get().toEntity());
                 result = summonerRepository.findSummonerIntegrationInformationByName(name);
             }
         }
@@ -33,26 +29,19 @@ public class SummonerService {
     }
 
     @Transactional
-    public List<SummonerIntegrationInformationResponseDTO> renewData(String name, String id) {
-
-        summonerRepository.deleteById(id);
-
+    public SummonerIntegrationInformationResponseDTO renewData(String name, String id) {
         Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        if( !JSONData.isEmpty() ) {
+        if(JSONData.isPresent()) {
+            // 등록,수정 둘다 가능합니다.
             summonerRepository.save(JSONData.get().toEntity());
+        } else {
+            Optional<Summoner> summoner = summonerRepository.findById(id);
+            if(summoner.isPresent()) {
+                // 라이엇서버에 소환사가 존재하지 않는다면 해당 데이터의 summoner.name을 공백으로 update합니다
+                summoner.get().update(summoner.get().getAccountId(), summoner.get().getProfileIconId(), summoner.get().getRevisionDate(),
+                        "", summoner.get().getPuuid(), summoner.get().getSummonerLevel());
+            }
         }
-
-        return findByName(name);
-    }
-
-    @Transactional
-    public String update(String id, Summoner requestDto) {
-        Summoner summoner = summonerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 소환사가 없습니다. id=" + id));
-
-        summoner.update(requestDto.getAccountId(), requestDto.getProfileIconId(), requestDto.getRevisionDate(),
-                requestDto.getName(), requestDto.getPuuid(), requestDto.getSummonerLevel());
-
-        return id;
+        return summonerRepository.findSummonerIntegrationInformationByName(name);
     }
 }

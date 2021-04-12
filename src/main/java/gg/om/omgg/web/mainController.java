@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Controller
 public class mainController {
@@ -24,8 +22,7 @@ public class mainController {
     @GetMapping("/userName={name}")
     public String selectDetail(Model model, @PathVariable("name") String summonerName) {
 
-        List<SummonerIntegrationInformationResponseDTO> dto = summonerService.findByName(summonerName);
-
+        SummonerIntegrationInformationResponseDTO dto = summonerService.findByName(summonerName);
         model.addAttribute("summoner", dto);
 
         return "summonerDetail";

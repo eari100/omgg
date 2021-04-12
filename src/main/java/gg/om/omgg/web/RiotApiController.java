@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 public class RiotApiController {
@@ -17,7 +15,7 @@ public class RiotApiController {
     private final SummonerService summonerService;
 
     @PostMapping("/api/renew")
-    public List<SummonerIntegrationInformationResponseDTO> selectDetail(@RequestBody RenewRequestDTO requestDTO) {
+    public SummonerIntegrationInformationResponseDTO selectDetail(@RequestBody RenewRequestDTO requestDTO) {
         return summonerService.renewData(requestDTO.getName(), requestDTO.getId());
     }
 }
