@@ -5,9 +5,6 @@ import gg.om.omgg.domain.match.QMatch;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
-
-
 @RequiredArgsConstructor
 public class SummonerCustomRepositoryImpl implements SummonerCustomRepository {
     private final JPAQueryFactory queryFactory;
