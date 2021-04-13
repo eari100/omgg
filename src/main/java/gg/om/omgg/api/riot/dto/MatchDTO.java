@@ -23,7 +23,7 @@ public class MatchDTO {
     private String gameMode;
     private List<ParticipantDTO> participants;
 
-    public Match toEntity(long gameId, int queueId, String platformId, int seasonId) {
+    public Match toEntity() {
         return Match.builder()
                 .gameId(gameId)
                 .queueId(queueId)
