@@ -3,6 +3,7 @@ package gg.om.omgg.api.riot.service;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,14 +55,15 @@ public class SummonerServiceTests {
         );
         summonerService.renewData(name, id);
 
-        Optional<Summoner> DBData = summonerRepository.findById(id);
-        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        assertThat(DBData.get().getProfileIconId()).isEqualTo(JSONData.get().getProfileIconId());
-        assertThat(DBData.get().getRevisionDate()).isEqualTo(JSONData.get().getRevisionDate());
-        assertThat(DBData.get().getName()).isEqualTo(JSONData.get().getName());
-        assertThat(DBData.get().getId()).isEqualTo(JSONData.get().getId());
-        assertThat(DBData.get().getPuuid()).isEqualTo(JSONData.get().getPuuid());
-        assertThat(DBData.get().getSummonerLevel()).isEqualTo(JSONData.get().getSummonerLevel());
+        SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
+        Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
+        assertThat(DBData.getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
+        assertThat(DBData.getName()).isEqualTo(summonerDTO.get().getName());
+        assertThat(DBData.getId()).isEqualTo(summonerDTO.get().getId());
+        assertThat(DBData.getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
+        assertThat(DBData.getMatches().size()).isEqualTo(20);
+        System.out.println("======gameId들을 출력합니다.======");
+        DBData.getMatches().stream().forEach(match -> System.out.println(match.getGameId()));
     }
 
     @Test
@@ -70,14 +72,15 @@ public class SummonerServiceTests {
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
         summonerService.renewData(name, id);
 
-        Optional<Summoner> DBData = summonerRepository.findById(id);
-        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        assertThat(DBData.get().getProfileIconId()).isEqualTo(JSONData.get().getProfileIconId());
-        assertThat(DBData.get().getRevisionDate()).isEqualTo(JSONData.get().getRevisionDate());
-        assertThat(DBData.get().getName()).isEqualTo(JSONData.get().getName());
-        assertThat(DBData.get().getId()).isEqualTo(JSONData.get().getId());
-        assertThat(DBData.get().getPuuid()).isEqualTo(JSONData.get().getPuuid());
-        assertThat(DBData.get().getSummonerLevel()).isEqualTo(JSONData.get().getSummonerLevel());
+        SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
+        Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
+        assertThat(DBData.getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
+        assertThat(DBData.getName()).isEqualTo(summonerDTO.get().getName());
+        assertThat(DBData.getId()).isEqualTo(summonerDTO.get().getId());
+        assertThat(DBData.getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
+        assertThat(DBData.getMatches().size()).isEqualTo(20);
+        System.out.println("======gameId들을 출력합니다.======");
+        DBData.getMatches().stream().forEach(match -> System.out.println(match.getGameId()));
     }
 
     @Test
@@ -103,11 +106,12 @@ public class SummonerServiceTests {
         );
         summonerService.renewData(name, id);
 
+        // summoner.name을 공백으로 update 했기때문에 id로 조회해야 됩니다.
         Optional<Summoner> DBData = summonerRepository.findById(id);
-        summonerParser.getJSONData(name);
         assertThat(DBData.get().getAccountId()).isEqualTo(accountId);
         assertThat(DBData.get().getProfileIconId()).isEqualTo(profileIconId);
         assertThat(DBData.get().getRevisionDate()).isEqualTo(revisionDate);
+        // 공백으로 update 되었는 지 check
         assertThat(DBData.get().getName()).isEqualTo("");
         assertThat(DBData.get().getId()).isEqualTo(id);
         assertThat(DBData.get().getPuuid()).isEqualTo(puuid);
