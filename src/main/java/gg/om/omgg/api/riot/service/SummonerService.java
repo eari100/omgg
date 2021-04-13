@@ -1,19 +1,23 @@
 package gg.om.omgg.api.riot.service;
 
+import gg.om.omgg.api.riot.dto.MatchDTO;
+import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
+import gg.om.omgg.domain.match.MatchRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
+    private final MatchRepository matchRepository;
 
     @Transactional
     public SummonerIntegrationInformationResponseDTO findByName(String name) {
@@ -30,10 +34,29 @@ public class SummonerService {
 
     @Transactional
     public SummonerIntegrationInformationResponseDTO renewData(String name, String id) {
-        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        if(JSONData.isPresent()) {
-            // 등록,수정 둘다 가능합니다.
-            summonerRepository.save(JSONData.get().toEntity());
+        Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
+        if(summonerDTO.isPresent()) {
+            Summoner summoner = summonerDTO.get().toEntity();
+
+            MatchListParser matchListParser = new MatchListParser();
+            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(summonerDTO.get().getAccountId());
+
+            if(matchListDTO.isPresent()) {
+                Set<Long> gameIds = new HashSet<>();
+                matchListDTO.get().getMatches().stream().forEach(match->gameIds.add(match.getGameId()));
+
+                for(long gameId:gameIds) {
+                    MatchDetailParser matchDetailParser = new MatchDetailParser();
+                    Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
+
+                    if(matchDTO.isPresent()) {
+                        matchRepository.save(matchDTO.get().toEntity());
+                        summoner.getMatches().add(matchDTO.get().toEntity());
+                    }
+                }
+            }
+            // save()으로 등록,수정 둘다 가능합니다.
+            summonerRepository.save(summoner);
         } else {
             Optional<Summoner> summoner = summonerRepository.findById(id);
             if(summoner.isPresent()) {
