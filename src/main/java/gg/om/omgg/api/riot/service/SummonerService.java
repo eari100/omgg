@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -42,8 +43,10 @@ public class SummonerService {
             Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(summonerDTO.get().getAccountId());
 
             if(matchListDTO.isPresent()) {
-                Set<Long> gameIds = new HashSet<>();
-                matchListDTO.get().getMatches().stream().forEach(match->gameIds.add(match.getGameId()));
+                HashSet<Long> gameIds = matchListDTO.get().getMatches()
+                                        .stream()
+                                        .map(match->match.getGameId())
+                                        .collect(HashSet::new, HashSet::add, HashSet::addAll);
 
                 for(long gameId:gameIds) {
                     MatchDetailParser matchDetailParser = new MatchDetailParser();
