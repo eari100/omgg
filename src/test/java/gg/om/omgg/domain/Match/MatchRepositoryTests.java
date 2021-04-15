@@ -34,6 +34,8 @@ public class MatchRepositoryTests {
         int[] queueIds = {420, 450, 420, 420, 420, 450, 450, 450, 450, 450, 420, 450, 420, 450, 450, 450, 420, 450, 450, 450};
         String platformId = "KR";
         int seasonId = 13;
+        long gameCreation = 1604932783165L;
+        long gameDutation = 897L;
 
         for(int i=0;i<20;i++) {
             matchRepository.save(Match.builder()
@@ -41,6 +43,8 @@ public class MatchRepositoryTests {
                     .queueId(queueIds[i])
                     .platformId(platformId)
                     .seasonId(seasonId)
+                    .gameCreation(gameCreation)
+                    .gameDuration(gameDutation)
                     .build()
             );
         }
@@ -53,7 +57,8 @@ public class MatchRepositoryTests {
             assertThat(match.getQueueId()).isEqualTo(queueIds[i]);
             assertThat(match.getPlatformId()).isEqualTo(platformId);
             assertThat(match.getSeasonId()).isEqualTo(seasonId);
+            assertThat(match.getGameCreation()).isEqualTo(gameCreation);
+            assertThat(match.getGameDuration()).isEqualTo(gameDutation);
         }
-
     }
 }
