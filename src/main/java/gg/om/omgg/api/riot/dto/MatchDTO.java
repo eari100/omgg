@@ -29,6 +29,8 @@ public class MatchDTO {
                 .queueId(queueId)
                 .platformId(platformId)
                 .seasonId(seasonId)
+                .gameCreation(gameCreation)
+                .gameDuration(gameDuration)
                 .build();
     }
 }
