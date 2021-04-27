@@ -4,6 +4,7 @@ import gg.om.omgg.api.riot.dto.MatchDTO;
 import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -19,6 +19,7 @@ public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
     private final MatchRepository matchRepository;
+    private final ParticipantRepository participantRepository;
 
     @Transactional
     public SummonerIntegrationInformationResponseDTO findByName(String name) {
@@ -53,8 +54,10 @@ public class SummonerService {
                     Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
 
                     if(matchDTO.isPresent()) {
-                        matchRepository.save(matchDTO.get().toEntity());
-                        summoner.getMatches().add(matchDTO.get().toEntity());
+                        matchRepository.save(matchDTO.get().matchToEntity());
+                        summoner.getMatches().add(matchDTO.get().matchToEntity());
+
+                        participantRepository.saveAll(matchDTO.get().participantToEntity());
                     }
                 }
             }
