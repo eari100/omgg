@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @NoArgsConstructor
@@ -27,8 +26,8 @@ public class Summoner implements Serializable {
 
     @OneToMany
     @JoinTable(name="summoner_match",
-            joinColumns = @JoinColumn(name="account_id"),
-            inverseJoinColumns = @JoinColumn(name="game_id")
+            joinColumns = @JoinColumn(name="account_id", referencedColumnName="account_id"),
+            inverseJoinColumns = @JoinColumn(name="game_id", referencedColumnName="game_id")
     )
     private List<Match> matches = new ArrayList<>();
 
