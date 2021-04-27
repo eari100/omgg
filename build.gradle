@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.apache.httpcomponents:httpclient'
+    implementation group: 'com.querydsl', name: 'querydsl-sql', version: '4.4.0'
     compileOnly 'org.projectlombok:lombok'
     compile 'org.springframework.boot:spring-boot-devtools'
     compile 'com.querydsl:querydsl-jpa'
