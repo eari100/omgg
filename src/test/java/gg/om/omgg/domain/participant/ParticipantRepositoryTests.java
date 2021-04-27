@@ -86,7 +86,7 @@ public class ParticipantRepositoryTests {
                     Participant.builder()
                             .participantId(
                                     ParticipantId.builder()
-                                            .match(match)
+                                            .gameId(gameId)
                                             .participantId(i+1)
                                             .build()
                             )
@@ -124,7 +124,7 @@ public class ParticipantRepositoryTests {
         for(int i=0;i<10;i++) {
             Participant participant = findParticipantList.get(i);
 
-            assertThat(participant.getParticipantId().getMatch().getGameId()).isEqualTo(gameId);
+            assertThat(participant.getParticipantId().getGameId()).isEqualTo(gameId);
             assertThat(participant.getChampionId()).isEqualTo(championIds[i]);
             assertThat(participant.getTeamId()).isEqualTo(teamIds[i]);
             assertThat(participant.getSpell1Id()).isEqualTo(spell1Id);
