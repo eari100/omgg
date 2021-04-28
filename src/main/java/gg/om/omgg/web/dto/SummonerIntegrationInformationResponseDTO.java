@@ -4,7 +4,7 @@ import gg.om.omgg.domain.match.Match;
 import gg.om.omgg.domain.summoner.Summoner;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.*;
 
 @Getter
 public class SummonerIntegrationInformationResponseDTO {
@@ -20,7 +20,10 @@ public class SummonerIntegrationInformationResponseDTO {
             this.name = summoner.getName();
             this.summonerLevel = summoner.getSummonerLevel();
             this.id = summoner.getId();
-            this.matches = summoner.getMatches();
+
+            List<Match> matchList = new ArrayList<>(summoner.getMatches());
+            matchList.sort((m1,m2)->new Match().compare(m1,m2));
+            this.matches = matchList;
         }
     }
 }

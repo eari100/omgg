@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Match {
+public class Match implements Comparator<Match> {
     @Id
     @Column(name="game_id")
     private long gameId;
@@ -34,5 +35,14 @@ public class Match {
         this.seasonId = seasonId;
         this.gameCreation = gameCreation;
         this.gameDuration = gameDuration;
+    }
+
+    // 내림차순 정렬
+    @Override
+    public int compare(Match match1, Match match2) {
+        if(match1.getGameId() < match2.getGameId()) return 1;
+        else if(match1.getGameId() > match2.getGameId()) return -1;
+
+        return 0;
     }
 }
