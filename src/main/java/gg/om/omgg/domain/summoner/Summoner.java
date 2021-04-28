@@ -29,7 +29,7 @@ public class Summoner implements Serializable {
             joinColumns = @JoinColumn(name="account_id", referencedColumnName="account_id"),
             inverseJoinColumns = @JoinColumn(name="game_id", referencedColumnName="game_id")
     )
-    private List<Match> matches = new ArrayList<>();
+    private Set<Match> matches = new HashSet<>();
 
     @Builder
     public Summoner(String id, String accountId, int profileIconId, long revisionDate, String name, String puuid, long summonerLevel) {
