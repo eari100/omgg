@@ -1,6 +1,8 @@
 package gg.om.omgg.api.riot.service;
 
 import gg.om.omgg.api.riot.dto.SummonerDTO;
+import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
@@ -21,16 +23,20 @@ public class SummonerServiceTests {
 
     @Autowired
     SummonerRepository summonerRepository;
-
+    @Autowired
+    MatchRepository matchRepository;
+    @Autowired
+    ParticipantRepository participantRepository;
     @Autowired
     SummonerService summonerService;
-
     @Autowired
     SummonerParser summonerParser;
 
     @After
     public void cleanUp() {
         summonerRepository.deleteAll();
+        participantRepository.deleteAll();
+        matchRepository.deleteAll();
     }
 
     @Test
