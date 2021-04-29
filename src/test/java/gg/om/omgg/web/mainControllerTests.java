@@ -41,7 +41,7 @@ public class mainControllerTests {
     }
 
     @Test
-    public void 이름으로_소환사_찾기_case_DB에_정보_존재() throws Exception {
+    public void 이름으로_소환사_찾기_DB에는_정보_존재() throws Exception {
 
         String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
         int profileIconId = 11;
@@ -70,7 +70,7 @@ public class mainControllerTests {
     }
 
     @Test
-    public void 이름으로_소환사_찾기_case_DB에_정보_없음() throws Exception {
+    public void 이름으로_소환사_찾기_DB에는_정보_없음() throws Exception {
 
         String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
         //int profileIconId = 11;
@@ -96,7 +96,7 @@ public class mainControllerTests {
     }
 
     @Test
-    public void 이름으로_소환사_찾기_case_존재하지않는_소환사_검색() throws Exception {
+    public void 이름으로_소환사_찾기_존재하지않는_소환사_검색_DB에는_정보_없음() throws Exception {
         String url = "http://localhost:" + port + "/userName=거세짱999킹재욱";
 
         String body = this.restTemplate.getForObject(url, String.class);

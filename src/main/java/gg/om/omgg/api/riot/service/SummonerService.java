@@ -1,49 +1,102 @@
 package gg.om.omgg.api.riot.service;
 
+import gg.om.omgg.api.riot.dto.MatchDTO;
+import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
+import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
-import gg.om.omgg.web.dto.SummonerResponseDTO;
+import gg.om.omgg.web.dto.MatchesListLeadMoreResponseDTO;
+import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class SummonerService {
     private final SummonerRepository summonerRepository;
     private final SummonerParser summonerParser;
-    @Transactional
-    public void save(SummonerDTO summonerDTO) { summonerRepository.save(summonerDTO.toEntity()); }
+    private final MatchRepository matchRepository;
+    private final ParticipantRepository participantRepository;
 
     @Transactional
-    public Optional<SummonerResponseDTO> findByName(String name) {
-        Optional<Summoner> result = summonerRepository.findByName(name);
-        if(result.isEmpty()) {
+    public SummonerIntegrationInformationResponseDTO findByName(String name) {
+        SummonerIntegrationInformationResponseDTO result = summonerRepository.findSummonerIntegrationInformationByName(name);
+        if(result==null) {
             Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-            if(JSONData.isEmpty()) {
-                return Optional.empty();
-            } else {
-                save(JSONData.get());
-                return Optional.of(new SummonerResponseDTO(summonerRepository.findByName(name).get()));
+            if(JSONData.isPresent()) {
+                summonerRepository.save(JSONData.get().toEntity());
+                result = summonerRepository.findSummonerIntegrationInformationByName(name);
             }
-        } else {
-            return Optional.of(new SummonerResponseDTO(result.get()));
         }
+        return result;
     }
 
     @Transactional
-    public Optional<SummonerResponseDTO> renewData(String name, String id) {
+    public SummonerIntegrationInformationResponseDTO renewData(String name, String id) {
+        Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
+        if(summonerDTO.isPresent()) {
+            Summoner summoner = summonerDTO.get().toEntity();
 
-        summonerRepository.deleteById(id);
+            MatchListParser matchListParser = new MatchListParser();
+            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(summonerDTO.get().getAccountId(),20);
 
-        Optional<SummonerDTO> JSONData = summonerParser.getJSONData(name);
-        if( !JSONData.isEmpty() ) {
-            summonerRepository.save(JSONData.get().toEntity());
+            if(matchListDTO.isPresent()) {
+                HashSet<Long> gameIds = matchListDTO.get().getMatches()
+                                        .stream()
+                                        .map(match->match.getGameId())
+                                        .collect(HashSet::new, HashSet::add, HashSet::addAll);
+
+                for(long gameId:gameIds) {
+                    MatchDetailParser matchDetailParser = new MatchDetailParser();
+                    Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
+
+                    if(matchDTO.isPresent()) {
+                        matchRepository.save(matchDTO.get().matchToEntity());
+                        summoner.getMatches().add(matchDTO.get().matchToEntity());
+
+                        participantRepository.saveAll(matchDTO.get().participantToEntity());
+                    }
+                }
+            }
+            // save()으로 등록,수정 둘다 가능합니다.
+            summonerRepository.save(summoner);
+        } else {
+            Optional<Summoner> summoner = summonerRepository.findById(id);
+            if(summoner.isPresent()) {
+                // 라이엇서버에 소환사가 존재하지 않는다면 해당 데이터의 summoner.name을 공백으로 update합니다
+                summoner.get().update(summoner.get().getAccountId(), summoner.get().getProfileIconId(), summoner.get().getRevisionDate(),
+                        "", summoner.get().getPuuid(), summoner.get().getSummonerLevel());
+            }
         }
+        return summonerRepository.findSummonerIntegrationInformationByName(name);
+    }
 
-        return findByName(name);
+    @Transactional
+    public MatchesListLeadMoreResponseDTO matchesListLeadMore(String id, String accountId, int endIndex) {
+            MatchListParser matchListParser = new MatchListParser();
+            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(accountId, endIndex);
+
+            if(matchListDTO.isPresent()) {
+                HashSet<Long> gameIds = matchListDTO.get().getMatches()
+                        .stream()
+                        .map(match->match.getGameId())
+                        .collect(HashSet::new, HashSet::add, HashSet::addAll);
+
+                for(long gameId:gameIds) {
+                    MatchDetailParser matchDetailParser = new MatchDetailParser();
+                    Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
+
+                    if(matchDTO.isPresent()) {
+                        matchRepository.save(matchDTO.get().matchToEntity());
+                        participantRepository.saveAll(matchDTO.get().participantToEntity());
+                    }
+                }
+            }
+
+            return summonerRepository.findMatchesListLeadMoreById(id, endIndex);
     }
 }
