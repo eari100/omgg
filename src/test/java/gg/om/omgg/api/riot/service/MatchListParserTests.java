@@ -11,7 +11,7 @@ public class MatchListParserTests {
     @Test
     public void matchlist_parser_테스트() {
         MatchListParser parser = new MatchListParser();
-        Optional<MatchListDTO> dto = parser.getJSONData("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr");
+        Optional<MatchListDTO> dto = parser.getJSONData("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr",20);
 
         assertThat(dto.get().getEndIndex()).isEqualTo(20);
         assertThat(dto.get().getStartIndex()).isEqualTo(0);
