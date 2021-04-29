@@ -7,7 +7,7 @@
 <body>
 <form>
     <th:block th:unless="${summonerIntegrationInfo.getId()==null}">
-        <img th:src="'http://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/'+${summonerIntegrationInfo.profileIconId}+'.png'" width="300px" height="300px">
+        <img th:src="'https://opgg-static.akamaized.net/images/profile_icons/profileIcon'+${summonerIntegrationInfo.profileIconId}+'.jpg?image=q_auto:best&v=1518361200'" width="120px" height="120px">
         <h3 th:text="'LV:'+${summonerIntegrationInfo.summonerLevel}">LV:30</h3>
         <input type="hidden" id="summonerId" th:value="${summonerIntegrationInfo.id}">
         <input type="hidden" id="summonerName" th:value="${summonerIntegrationInfo.name}">
