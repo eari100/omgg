@@ -7,6 +7,7 @@ import gg.om.omgg.domain.match.MatchRepository;
 import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
+import gg.om.omgg.web.dto.MatchesListLeadMoreResponseDTO;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -72,5 +73,30 @@ public class SummonerService {
             }
         }
         return summonerRepository.findSummonerIntegrationInformationByName(name);
+    }
+
+    @Transactional
+    public MatchesListLeadMoreResponseDTO matchesListLeadMore(String id, String accountId, int endIndex) {
+            MatchListParser matchListParser = new MatchListParser();
+            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(accountId, endIndex);
+
+            if(matchListDTO.isPresent()) {
+                HashSet<Long> gameIds = matchListDTO.get().getMatches()
+                        .stream()
+                        .map(match->match.getGameId())
+                        .collect(HashSet::new, HashSet::add, HashSet::addAll);
+
+                for(long gameId:gameIds) {
+                    MatchDetailParser matchDetailParser = new MatchDetailParser();
+                    Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
+
+                    if(matchDTO.isPresent()) {
+                        matchRepository.save(matchDTO.get().matchToEntity());
+                        participantRepository.saveAll(matchDTO.get().participantToEntity());
+                    }
+                }
+            }
+
+            return summonerRepository.findMatchesListLeadMoreById(id, endIndex);
     }
 }
