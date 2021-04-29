@@ -136,4 +136,28 @@ public class SummonerServiceTests {
         Optional<Summoner> DBData = summonerRepository.findById(id);
         assertThat(DBData.isPresent()).isEqualTo(false);
     }
+
+    @Test
+    public void matchesList_더보기() {
+        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        int profileIconId = 11;
+        long revisionDate = 1609294136000L;
+        String name = "거세짱123";
+        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
+        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        long summonerLevel = 293L;
+
+        summonerRepository.save(Summoner.builder()
+                .accountId(accountId)
+                .profileIconId(profileIconId)
+                .revisionDate(revisionDate)
+                .name(name)
+                .id(id)
+                .puuid(puuid)
+                .summonerLevel(summonerLevel)
+                .build()
+        );
+
+        summonerService.matchesListLeadMore(id, accountId, 40);
+    }
 }
