@@ -59,7 +59,7 @@ public class SummonerServiceTests {
                 .summonerLevel(summonerLevel)
                 .build()
         );
-        summonerService.renewData(name, id);
+        summonerService.renewData(name);
 
         SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
         Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
@@ -76,7 +76,7 @@ public class SummonerServiceTests {
     public void 소환사가_라이엇서버존재O_DB존재X_할때_소환사정보갱신() {
         String name = "거세짱123";
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        summonerService.renewData(name, id);
+        summonerService.renewData(name);
 
         SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
         Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
@@ -110,7 +110,7 @@ public class SummonerServiceTests {
                 .summonerLevel(summonerLevel)
                 .build()
         );
-        summonerService.renewData(name, id);
+        summonerService.renewData(name);
 
         // summoner.name을 공백으로 update 했기때문에 id로 조회해야 됩니다.
         Optional<Summoner> DBData = summonerRepository.findById(id);
@@ -131,7 +131,7 @@ public class SummonerServiceTests {
         // 존재하지 않는 ID
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI-xxxxxxx";
 
-        summonerService.renewData(name, id);
+        summonerService.renewData(name);
 
         Optional<Summoner> DBData = summonerRepository.findById(id);
         assertThat(DBData.isPresent()).isEqualTo(false);
