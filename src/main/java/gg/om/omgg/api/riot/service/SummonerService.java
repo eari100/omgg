@@ -25,8 +25,8 @@ public class SummonerService {
     @Transactional
     public SummonerIntegrationInformationResponseDTO findByName(String name) {
         SummonerIntegrationInformationResponseDTO result = summonerRepository.findSummonerIntegrationInformationByName(name);
-        if(result==null) {
-            renewData(name);
+        if(result.getId()==null) {
+            result = renewData(name);
         }
         return result;
     }
