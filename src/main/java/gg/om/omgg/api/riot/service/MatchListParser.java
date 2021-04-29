@@ -16,10 +16,10 @@ import java.util.Optional;
 
 public class MatchListParser {
 
-    public Optional<MatchListDTO> getJSONData(String accountId) {
+    public Optional<MatchListDTO> getJSONData(String accountId, int endIndex) {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestURL = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/" + accountId
-                + "?api_key=" + Key.api_key + "&endIndex=20&beginIndex=0";
+                + "?api_key=" + Key.api_key + "&endIndex="+endIndex+"&beginIndex="+(endIndex-20);
         Optional<MatchListDTO> matchList = Optional.empty();
 
         try {

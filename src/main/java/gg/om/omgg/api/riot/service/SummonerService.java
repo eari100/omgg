@@ -41,7 +41,7 @@ public class SummonerService {
             Summoner summoner = summonerDTO.get().toEntity();
 
             MatchListParser matchListParser = new MatchListParser();
-            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(summonerDTO.get().getAccountId());
+            Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(summonerDTO.get().getAccountId(),20);
 
             if(matchListDTO.isPresent()) {
                 HashSet<Long> gameIds = matchListDTO.get().getMatches()
