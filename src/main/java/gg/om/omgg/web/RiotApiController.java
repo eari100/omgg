@@ -16,6 +16,6 @@ public class RiotApiController {
 
     @PostMapping("/api/renew")
     public SummonerIntegrationInformationResponseDTO selectDetail(@RequestBody RenewRequestDTO requestDTO) {
-        return summonerService.renewData(requestDTO.getName(), requestDTO.getId());
+        return summonerService.renewData(requestDTO.getName());
     }
 }

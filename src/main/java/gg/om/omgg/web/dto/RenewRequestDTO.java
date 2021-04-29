@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class RenewRequestDTO {
-    private String id;
     private String name;
 
     @Builder
-    public  RenewRequestDTO(String id, String name) {
-        this.id = id;
+    public  RenewRequestDTO(String name) {
         this.name = name;
     }
 }

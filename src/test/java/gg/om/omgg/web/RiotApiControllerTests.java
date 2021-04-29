@@ -67,7 +67,6 @@ public class RiotApiControllerTests {
         summonerRepository.save(summoner);
 
         RenewRequestDTO requestDto = RenewRequestDTO.builder()
-                .id(id)
                 .name(name)
                 .build();
 

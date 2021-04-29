@@ -23,7 +23,7 @@ public class mainController {
     public String selectDetail(Model model, @PathVariable("name") String summonerName) {
 
         SummonerIntegrationInformationResponseDTO dto = summonerService.findByName(summonerName);
-        model.addAttribute("summoner", dto);
+        model.addAttribute("summonerIntegrationInfo", dto);
 
         return "summonerDetail";
     }
