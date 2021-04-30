@@ -1,0 +1,63 @@
+.GameItem.Win>.Content {
+    background-color: #a3cfec;
+    border-color: #99b9cf;
+}
+
+.GameItem.Lose>.Content {
+    table-layout: fixed;
+    background-color: #e2b6b3;
+    border-color: #cea7a7;
+}
+
+.GameItem>.Content>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+
+.GameItem>.Content>.GameStats {
+    width: 70px;
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+    line-height: 16px;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionImage {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.GameItem>.Content>.GameSettingInfo>.SummonerSpell {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.GameItem>.Content>.GameSettingInfo>.Runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.GameItem>.Content>.GameStats>.Bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cdd2d2;
+}
+
+.GameItem>.Content>.GameSettingInfo>.ChampionName {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

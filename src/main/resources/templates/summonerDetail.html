@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>OMGG</title>
+
+    <link rel="stylesheet" href="css/summonerDetail.css">
 </head>
 <body>
 <form>
@@ -17,6 +19,53 @@
     <th:block th:if="${summonerIntegrationInfo.getId()==null}">
         <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>
     </th:block>
+
+    <div class="MatchesList">
+        <div th:each="match : ${summonerIntegrationInfo.getMatches()}" class="MatchWrap">
+            <div class="GameItem Lose">
+                <div class="Content">
+                    <div class="GameStats">
+                        <div class="GameType">
+                            자유 5:5 랭크
+                        </div>
+                        <div class="TimeStamp"><span class="_timeago _timeCountAssigned tip" data-datetime="1619710817" data-type="" data-interval="60" title="2021년 4월 30일 오전 12시 40분">11시간 전</span></div>
+                        <div class="Bar"></div>
+                        <div class="GameResult">
+                            승리
+                        </div>
+                        <div class="GameLength">30분 5초</div>
+
+                    </div>
+
+                    <div class="GameSettingInfo">
+                        <div class="ChampionImage">
+                            <img src="//opgg-static.akamaized.net/images/lol/champion/Malphite.png?image=c_scale,q_auto,w_46&amp;v=1619585878">
+                        </div>
+
+                        <div class="SummonerSpell">
+                            <div class="Spell">
+                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="순간이동">
+                            </div>
+                            <div class="Spell">
+                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="점멸">
+                            </div>
+                        </div>
+                        <div class="Runes">
+                            <div class="Rune">
+                                <img src="//opgg-static.akamaized.net/images/lol/perk/8229.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="신비로운 유성">
+                            </div>
+                            <div class="Rune">
+                                <img src="//opgg-static.akamaized.net/images/lol/perkStyle/8300.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="영감">
+                            </div>
+                        </div>
+                        <div class="ChampionName">
+                            말파이트
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 <th:block th:replace="fragment/footer :: commonFooter"></th:block>
 <script src="js/summonerDetail.js"></script>
