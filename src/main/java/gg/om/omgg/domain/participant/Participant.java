@@ -34,6 +34,7 @@ public class Participant {
     private int totalMinionsKilled;
     private int neutralMinionsKilled;
     private int visionWardsBoughtInGame;
+    private boolean win;
     // PlayerDto
     private String accoutId;
     private String summonerName;
@@ -44,7 +45,7 @@ public class Participant {
                        int item0, int item1, int item2, int item3, int item4, int item5, int item6,
                        int kills, int deaths, int assists, int perk0, int perkSubStyle,
                        int champLevel, int totalMinionsKilled, int neutralMinionsKilled, int visionWardsBoughtInGame,
-                       String accoutId, String summonerName, String summonerId) {
+                       String accoutId, String summonerName, String summonerId, boolean win) {
         this.participantId = participantId;
         this.championId = championId;
         this.teamId = teamId;
@@ -66,6 +67,7 @@ public class Participant {
         this.totalMinionsKilled = totalMinionsKilled;
         this.neutralMinionsKilled = neutralMinionsKilled;
         this.visionWardsBoughtInGame = visionWardsBoughtInGame;
+        this.win = win;
         this.accoutId = accoutId;
         this.summonerName = summonerName;
         this.summonerId = summonerId;

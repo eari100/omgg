@@ -71,6 +71,7 @@ public class MatchDTO {
                         .champLevel(participantDTO.getStats().getChampLevel())
                         .totalMinionsKilled(participantDTO.getStats().getTotalMinionsKilled())
                         .neutralMinionsKilled(participantDTO.getStats().getNeutralMinionsKilled())
+                        .win(participantDTO.getStats().isWin())
                         .accoutId(participantIdentityDTO.getPlayer().getAccountId())
                         .summonerName(participantIdentityDTO.getPlayer().getSummonerName())
                         .summonerId(participantIdentityDTO.getPlayer().getSummonerId())
