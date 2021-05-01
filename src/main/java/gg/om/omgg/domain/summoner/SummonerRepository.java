@@ -36,7 +36,8 @@ public interface SummonerRepository extends JpaRepository<Summoner, String>, Sum
             "max(case when x.participant_id = 7 then x.p_summoner_name end), " +
             "max(case when x.participant_id = 8 then x.p_summoner_name end), " +
             "max(case when x.participant_id = 9 then x.p_summoner_name end), " +
-            "max(case when x.participant_id = 10 then x.p_summoner_name end) " +
+            "max(case when x.participant_id = 10 then x.p_summoner_name end)," +
+            "mp.win " +
             "from ( " +
             "select " +
             "s.profile_icon_id, s.name as s_name, s.summoner_level, s.id as s_id, " +

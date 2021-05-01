@@ -39,6 +39,7 @@ public class IntegrationInfoResponseDTO {
     private int totalMinionsKilled;
     private int neutralMinionsKilled;
     private int visionWardsBoughtInGame;
+    private boolean win;
     
     // participant alias
     private int player1ChampionId;
@@ -73,7 +74,8 @@ public class IntegrationInfoResponseDTO {
             int player1ChampionId, int player2ChampionId, int player3ChampionId, int player4ChampionId, int player5ChampionId,
             int player6ChampionId, int player7ChampionId, int player8ChampionId, int player9ChampionId, int player10ChampionId,
             String player1SummonerName, String player2SummonerName, String player3SummonerName, String player4SummonerName, String player5SummonerName,
-            String player6SummonerName, String player7SummonerName, String player8SummonerName, String player9SummonerName, String player10SummonerName) {
+            String player6SummonerName, String player7SummonerName, String player8SummonerName, String player9SummonerName, String player10SummonerName,
+            boolean win) {
 
         this.profileIconId = profileIconId;
         this.name = name;
@@ -124,5 +126,6 @@ public class IntegrationInfoResponseDTO {
         this.player8SummonerName = player8SummonerName;
         this.player9SummonerName = player9SummonerName;
         this.player10SummonerName = player10SummonerName;
+        this.win = win;
     }
 }
