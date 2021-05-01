@@ -51,11 +51,11 @@ public interface SummonerRepository extends JpaRepository<Summoner, String>, Sum
             "left outer join participant p " +
             "on m.game_id = p.game_id " +
             "where s.name = :name " +
-            "limit 0,200 " +
+            "limit :endIndex-200, :endIndex " +
             ") x inner join participant mp " +
             "on x.m_game_id = mp.game_id " +
             "and mp.summoner_name = :name " +
             "group by x.m_game_id " +
             "order by x.m_game_id desc ", nativeQuery = true)
-    List<Object[]> findIntegrationInfoByName(@Param("name") String summonerName);
+    List<Object[]> findIntegrationInfoByName(@Param("name") String summonerName, @Param("endIndex") int endIndex);
 }
