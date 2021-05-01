@@ -5,6 +5,7 @@ import gg.om.omgg.domain.match.MatchRepository;
 import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
+import gg.om.omgg.web.dto.IntegrationInfoResponseDTO;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,15 +64,74 @@ public class SummonerServiceTests {
         );
         summonerService.renewData(name);
 
-        SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
+
+        for(Object[] obj : result) {
+            dtoList.add(
+                    IntegrationInfoResponseDTO.builder()
+                            .profileIconId((int)obj[0])
+                            .name((String)obj[1])
+                            .summonerLevel(((Number)obj[2]).longValue())
+                            .id((String)obj[3])
+
+                            .gameId(((Number)obj[4]).longValue())
+                            .queueId((int)obj[5])
+                            .platformId((String)obj[6])
+                            .seasonId((int)obj[7])
+                            .gameCreation(((Number)obj[8]).longValue())
+                            .gameDuration(((Number)obj[9]).longValue())
+
+                            .championId((int)obj[10])
+                            .spell1Id((int)obj[11])
+                            .spell2Id((int)obj[12])
+                            .item0((int)obj[13])
+                            .item1((int)obj[14])
+                            .item2((int)obj[15])
+                            .item3((int)obj[16])
+                            .item4((int)obj[17])
+                            .item5((int)obj[18])
+                            .item6((int)obj[19])
+                            .kills((int)obj[20])
+                            .deaths((int)obj[21])
+                            .assists((int)obj[22])
+                            .perk0((int)obj[23])
+                            .perkSubStyle((int)obj[24])
+                            .champLevel((int)obj[25])
+                            .totalMinionsKilled((int)obj[26])
+                            .neutralMinionsKilled((int)obj[27])
+                            .visionWardsBoughtInGame((int)obj[28])
+
+                            .player1ChampionId((int)obj[29])
+                            .player2ChampionId((int)obj[30])
+                            .player3ChampionId((int)obj[31])
+                            .player4ChampionId((int)obj[32])
+                            .player5ChampionId((int)obj[33])
+                            .player6ChampionId((int)obj[34])
+                            .player7ChampionId((int)obj[35])
+                            .player8ChampionId((int)obj[36])
+                            .player9ChampionId((int)obj[37])
+                            .player10ChampionId((int)obj[38])
+                            .player1SummonerName((String)obj[39])
+                            .player2SummonerName((String)obj[40])
+                            .player3SummonerName((String)obj[41])
+                            .player4SummonerName((String)obj[42])
+                            .player5SummonerName((String)obj[43])
+                            .player6SummonerName((String)obj[44])
+                            .player7SummonerName((String)obj[45])
+                            .player8SummonerName((String)obj[46])
+                            .player9SummonerName((String)obj[47])
+                            .player10SummonerName((String)obj[48])
+                            .win((boolean)obj[49])
+                            .build()
+            );
+        }
+
         Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
-        assertThat(DBData.getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
-        assertThat(DBData.getName()).isEqualTo(summonerDTO.get().getName());
-        assertThat(DBData.getId()).isEqualTo(summonerDTO.get().getId());
-        assertThat(DBData.getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
-        assertThat(DBData.getMatches().size()).isEqualTo(20);
-        System.out.println("======gameId들을 출력합니다.======");
-        DBData.getMatches().stream().forEach(match -> System.out.println(match.getGameId()));
+        assertThat(dtoList.get(0).getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
+        assertThat(dtoList.get(0).getName()).isEqualTo(summonerDTO.get().getName());
+        assertThat(dtoList.get(0).getId()).isEqualTo(summonerDTO.get().getId());
+        assertThat(dtoList.get(0).getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
     }
 
     @Test
@@ -78,15 +140,74 @@ public class SummonerServiceTests {
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
         summonerService.renewData(name);
 
-        SummonerIntegrationInformationResponseDTO DBData = summonerRepository.findSummonerIntegrationInformationByName(name);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
+
+        for(Object[] obj : result) {
+            dtoList.add(
+                    IntegrationInfoResponseDTO.builder()
+                            .profileIconId((int)obj[0])
+                            .name((String)obj[1])
+                            .summonerLevel(((Number)obj[2]).longValue())
+                            .id((String)obj[3])
+
+                            .gameId(((Number)obj[4]).longValue())
+                            .queueId((int)obj[5])
+                            .platformId((String)obj[6])
+                            .seasonId((int)obj[7])
+                            .gameCreation(((Number)obj[8]).longValue())
+                            .gameDuration(((Number)obj[9]).longValue())
+
+                            .championId((int)obj[10])
+                            .spell1Id((int)obj[11])
+                            .spell2Id((int)obj[12])
+                            .item0((int)obj[13])
+                            .item1((int)obj[14])
+                            .item2((int)obj[15])
+                            .item3((int)obj[16])
+                            .item4((int)obj[17])
+                            .item5((int)obj[18])
+                            .item6((int)obj[19])
+                            .kills((int)obj[20])
+                            .deaths((int)obj[21])
+                            .assists((int)obj[22])
+                            .perk0((int)obj[23])
+                            .perkSubStyle((int)obj[24])
+                            .champLevel((int)obj[25])
+                            .totalMinionsKilled((int)obj[26])
+                            .neutralMinionsKilled((int)obj[27])
+                            .visionWardsBoughtInGame((int)obj[28])
+
+                            .player1ChampionId((int)obj[29])
+                            .player2ChampionId((int)obj[30])
+                            .player3ChampionId((int)obj[31])
+                            .player4ChampionId((int)obj[32])
+                            .player5ChampionId((int)obj[33])
+                            .player6ChampionId((int)obj[34])
+                            .player7ChampionId((int)obj[35])
+                            .player8ChampionId((int)obj[36])
+                            .player9ChampionId((int)obj[37])
+                            .player10ChampionId((int)obj[38])
+                            .player1SummonerName((String)obj[39])
+                            .player2SummonerName((String)obj[40])
+                            .player3SummonerName((String)obj[41])
+                            .player4SummonerName((String)obj[42])
+                            .player5SummonerName((String)obj[43])
+                            .player6SummonerName((String)obj[44])
+                            .player7SummonerName((String)obj[45])
+                            .player8SummonerName((String)obj[46])
+                            .player9SummonerName((String)obj[47])
+                            .player10SummonerName((String)obj[48])
+                            .win((boolean)obj[49])
+                            .build()
+            );
+        }
+
         Optional<SummonerDTO> summonerDTO = summonerParser.getJSONData(name);
-        assertThat(DBData.getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
-        assertThat(DBData.getName()).isEqualTo(summonerDTO.get().getName());
-        assertThat(DBData.getId()).isEqualTo(summonerDTO.get().getId());
-        assertThat(DBData.getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
-        assertThat(DBData.getMatches().size()).isEqualTo(20);
-        System.out.println("======gameId들을 출력합니다.======");
-        DBData.getMatches().stream().forEach(match -> System.out.println(match.getGameId()));
+        assertThat(dtoList.get(0).getProfileIconId()).isEqualTo(summonerDTO.get().getProfileIconId());
+        assertThat(dtoList.get(0).getName()).isEqualTo(summonerDTO.get().getName());
+        assertThat(dtoList.get(0).getId()).isEqualTo(summonerDTO.get().getId());
+        assertThat(dtoList.get(0).getSummonerLevel()).isEqualTo(summonerDTO.get().getSummonerLevel());
     }
 
     @Test
@@ -158,6 +279,6 @@ public class SummonerServiceTests {
                 .build()
         );
 
-        summonerService.matchesListLeadMore(id, accountId, 40);
+        summonerService.matchesListLeadMore(id, accountId, 400);
     }
 }
