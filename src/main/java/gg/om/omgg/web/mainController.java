@@ -1,12 +1,14 @@
 package gg.om.omgg.web;
 
 import gg.om.omgg.api.riot.service.SummonerService;
-import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
+import gg.om.omgg.web.dto.IntegrationInfoResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -22,8 +24,8 @@ public class mainController {
     @GetMapping("/userName={name}")
     public String selectDetail(Model model, @PathVariable("name") String summonerName) {
 
-        SummonerIntegrationInformationResponseDTO dto = summonerService.findByName(summonerName);
-        model.addAttribute("summonerIntegrationInfo", dto);
+        List<IntegrationInfoResponseDTO> dto = summonerService.findByName(summonerName);
+        model.addAttribute("IntegrationInfo", dto);
 
         return "summonerDetail";
     }
