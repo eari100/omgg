@@ -354,7 +354,7 @@ public class SummonerRepositoryTests {
                 "H9h7OYqErUcfzYNV9TYDyPyIlmP3P6KihCztidNhTcyxxHs", "by5pAc9A9aWsb6vaRZEbUtSuQMpr5cGJl-DUXvS8uWWhklE", "Fa-NvjjixlevSqN5dfqC_LNS-RgEvcAUf7fco0qvKdIl7gc",
                 "kdpMk97BRlWxo1XxvcnxpXYFx7Ud2dBKPnKZRTkXmqO8bA", "R2CG5kVuifWF-080i6Qd3JD4G8TnZ931gDC4p6cAggNR4A", "kB7fd-D3zbbweFEzSF2M8v4H5dcbNxdeAuqA6V1_BfsuFTo",
                 "iZ7_Zg_23rr1ppp8uZKI2BY8IoJGiuuoBmINRBzXBpNbfak", "SKk28IZ2fIzRyXsC-DzI79ps_8IMr5CMZbyjABD_CorRu-w"};
-
+        boolean[] wins = {true, true, true, true, true, false, false, false, false, false};
 
         for(int i=0;i<20;i++) {
             Match match = matchRepository.save(
@@ -398,6 +398,7 @@ public class SummonerRepositoryTests {
                                 .accoutId(accoutIds[j])
                                 .summonerName(summonerNames[j])
                                 .summonerId(summonerIds[j])
+                                .win(wins[j])
                                 .build()
                 );
             }
@@ -465,6 +466,7 @@ public class SummonerRepositoryTests {
                         .player8SummonerName((String)obj[46])
                         .player9SummonerName((String)obj[47])
                         .player10SummonerName((String)obj[48])
+                        .win((boolean)obj[49])
                         .build()
             );
         }
@@ -540,10 +542,11 @@ public class SummonerRepositoryTests {
                             .player8SummonerName((String)obj[46])
                             .player9SummonerName((String)obj[47])
                             .player10SummonerName((String)obj[48])
+                            .win((boolean)obj[49])
                             .build()
             );
         }
-        
+
         assertThat(dtoList.size()).isEqualTo(0);
     }
 }
