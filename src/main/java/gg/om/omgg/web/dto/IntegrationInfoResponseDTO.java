@@ -52,6 +52,17 @@ public class IntegrationInfoResponseDTO {
     private int player8ChampionId;
     private int player9ChampionId;
     private int player10ChampionId;
+    private String championName;
+    private String player1ChampionName;
+    private String player2ChampionName;
+    private String player3ChampionName;
+    private String player4ChampionName;
+    private String player5ChampionName;
+    private String player6ChampionName;
+    private String player7ChampionName;
+    private String player8ChampionName;
+    private String player9ChampionName;
+    private String player10ChampionName;
     private String player1SummonerName;
     private String player2SummonerName;
     private String player3SummonerName;
@@ -77,6 +88,8 @@ public class IntegrationInfoResponseDTO {
             String player6SummonerName, String player7SummonerName, String player8SummonerName, String player9SummonerName, String player10SummonerName,
             boolean win) {
 
+        DBColumnConverter cv = new DBColumnConverter();
+
         this.profileIconId = profileIconId;
         this.name = name;
         this.summonerLevel = summonerLevel;
@@ -88,6 +101,7 @@ public class IntegrationInfoResponseDTO {
         this.gameCreation = gameCreation;
         this.gameDuration = gameDuration;
         this.championId = championId;
+        this.championName = cv.convertToChampionName(championId);
         this.spell1Id = spell1Id;
         this.spell2Id = spell2Id;
         this.item0 = item0;
@@ -116,6 +130,16 @@ public class IntegrationInfoResponseDTO {
         this.player8ChampionId = player8ChampionId;
         this.player9ChampionId = player9ChampionId;
         this.player10ChampionId = player10ChampionId;
+        this.player1ChampionName = cv.convertToChampionName(player1ChampionId);
+        this.player2ChampionName = cv.convertToChampionName(player2ChampionId);
+        this.player3ChampionName = cv.convertToChampionName(player3ChampionId);
+        this.player4ChampionName = cv.convertToChampionName(player4ChampionId);
+        this.player5ChampionName = cv.convertToChampionName(player5ChampionId);
+        this.player6ChampionName = cv.convertToChampionName(player6ChampionId);
+        this.player7ChampionName = cv.convertToChampionName(player7ChampionId);
+        this.player8ChampionName = cv.convertToChampionName(player8ChampionId);
+        this.player9ChampionName = cv.convertToChampionName(player9ChampionId);
+        this.player10ChampionName = cv.convertToChampionName(player10ChampionId);
         this.player1SummonerName = player1SummonerName;
         this.player2SummonerName = player2SummonerName;
         this.player3SummonerName = player3SummonerName;
