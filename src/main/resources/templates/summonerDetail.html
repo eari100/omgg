@@ -8,59 +8,53 @@
 </head>
 <body>
 <form>
-    <th:block th:unless="${summonerIntegrationInfo.getId()==null}">
-        <img th:src="'https://opgg-static.akamaized.net/images/profile_icons/profileIcon'+${summonerIntegrationInfo.profileIconId}+'.jpg?image=q_auto:best&v=1518361200'" width="120px" height="120px">
-        <h3 th:text="'LV:'+${summonerIntegrationInfo.summonerLevel}">LV:30</h3>
-        <input type="hidden" id="summonerId" th:value="${summonerIntegrationInfo.id}">
-        <input type="hidden" id="summonerName" th:value="${summonerIntegrationInfo.name}">
-        <h1 th:text="${summonerIntegrationInfo.name}">김소환사</h1>
+    <th:block th:unless="${IntegrationInfo.size()==0}">
+        <img th:src="'https://opgg-static.akamaized.net/images/profile_icons/profileIcon'+${IntegrationInfo.get(0).profileIconId}+'.jpg?image=q_auto:best&v=1518361200'" width="120px" height="120px">
+        <h3 th:text="'LV:'+${IntegrationInfo.get(0).summonerLevel}">LV:30</h3>
+        <input type="hidden" id="summonerId" th:value="${IntegrationInfo.get(0).id}">
+        <input type="hidden" id="summonerName" th:value="${IntegrationInfo.get(0).name}">
+        <h1 th:text="${IntegrationInfo.get(0).name}">김소환사</h1>
         <button type="button" id="btn-refresh">전적갱신</button>
     </th:block>
-    <th:block th:if="${summonerIntegrationInfo.getId()==null}">
+    <th:block th:if="${IntegrationInfo.size()==0}">
         <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>
     </th:block>
 
     <div class="MatchesList">
-        <div th:each="match : ${summonerIntegrationInfo.getMatches()}" class="MatchWrap">
-            <div class="GameItem Lose">
+        <div th:each="matchItem : ${IntegrationInfo}" class="MatchWrap">
+            <div class="GameItem" th:classappend="${matchItem.win == true ? 'Win' : 'Lose'}">
                 <div class="Content">
                     <div class="GameStats">
-                        <div class="GameType">
-                            자유 5:5 랭크
-                        </div>
-                        <div class="TimeStamp"><span class="_timeago _timeCountAssigned tip" data-datetime="1619710817" data-type="" data-interval="60" title="2021년 4월 30일 오전 12시 40분">11시간 전</span></div>
+                        <div class="GameType" th:text="${matchItem.queueId}">자유 5:5 랭크</div>
+                        <div class="TimeStamp"><span class="_timeago _timeCountAssigned tip" data-datetime="1619710817" data-type="" data-interval="60" title="2021년 4월 30일 오전 12시 40분" th:text="${matchItem.gameCreation}">11시간 전</span></div>
                         <div class="Bar"></div>
-                        <div class="GameResult">
-                            승리
-                        </div>
-                        <div class="GameLength">30분 5초</div>
+                        <div class="GameResult" th:text="${matchItem.win}">승리</div>
+                        <div class="GameLength" th:text="${matchItem.gameDuration}">30분 5초</div>
 
                     </div>
 
                     <div class="GameSettingInfo">
                         <div class="ChampionImage">
-                            <img src="//opgg-static.akamaized.net/images/lol/champion/Malphite.png?image=c_scale,q_auto,w_46&amp;v=1619585878">
+                            <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.championName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'">
                         </div>
 
                         <div class="SummonerSpell">
                             <div class="Spell">
-                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="순간이동">
+                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png?image=c_scale,q_auto,w_22&amp;v=1619585878">
                             </div>
                             <div class="Spell">
-                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="점멸">
+                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=c_scale,q_auto,w_22&amp;v=1619585878">
                             </div>
                         </div>
                         <div class="Runes">
                             <div class="Rune">
-                                <img src="//opgg-static.akamaized.net/images/lol/perk/8229.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="신비로운 유성">
+                                <img th:src="'//opgg-static.akamaized.net/images/lol/perk/'+${matchItem.perk0}+'.png?image=c_scale,q_auto,w_22&amp;v=1619585878'">
                             </div>
                             <div class="Rune">
-                                <img src="//opgg-static.akamaized.net/images/lol/perkStyle/8300.png?image=c_scale,q_auto,w_22&amp;v=1619585878" class="Image tip tpd-delegation-uid-1" title="" alt="영감">
+                                <img th:src="'//opgg-static.akamaized.net/images/lol/perkStyle/'+${matchItem.perkSubStyle}+'.png?image=c_scale,q_auto,w_22&amp;v=1619585878'">
                             </div>
                         </div>
-                        <div class="ChampionName">
-                            말파이트
-                        </div>
+                        <div class="ChampionName" th:text="${matchItem.championName}">제드</div>
                     </div>
                 </div>
             </div>
