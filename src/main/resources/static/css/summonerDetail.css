@@ -61,3 +61,32 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.GameItem>.Content>.KDA {
+    font-size: 11px;
+    text-align: center;
+}
+
+.GameItem>.Content>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+
+.GameItem>.Content>.KDA>.KDA {
+    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Kill, .GameItem>.Content>.KDA>.KDA>.Assist {
+    color: #555e5e;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Kill, .GameItem>.Content>.KDA>.KDA>.Death, .GameItem>.Content>.KDA>.KDA>.Assist {
+    font-weight: bold;
+}
+
+.GameItem>.Content>.KDA>.KDA>.Death {
+    color: #c6443e;
+}

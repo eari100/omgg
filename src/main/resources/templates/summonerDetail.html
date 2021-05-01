@@ -56,6 +56,17 @@
                         </div>
                         <div class="ChampionName" th:text="${matchItem.championName}">제드</div>
                     </div>
+                    <div class="KDA">
+                        <div class="KDA">
+                            <span class="Kill" th:text="${matchItem.kills}">11</span> /
+                            <span class="Death" th:text="${matchItem.deaths}">7</span> /
+                            <span class="Assist" th:text="${matchItem.assists}">9</span>
+                        </div>
+                        <div class="KDARatio">
+                            <!--<span class="KDARatio ">2.86:1</span> 평점-->
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
