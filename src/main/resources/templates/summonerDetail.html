@@ -39,10 +39,10 @@
 
                         <div class="SummonerSpell">
                             <div class="Spell">
-                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png?image=c_scale,q_auto,w_22&amp;v=1619585878">
+                                <img th:src="'//opgg-static.akamaized.net/images/lol/spell/'+${matchItem.spell1Name}+'.png?image=c_scale,q_auto,w_22&amp;v=1619585878'">
                             </div>
                             <div class="Spell">
-                                <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=c_scale,q_auto,w_22&amp;v=1619585878">
+                                <img th:src="'//opgg-static.akamaized.net/images/lol/spell/'+${matchItem.spell2Name}+'.png?image=c_scale,q_auto,w_22&amp;v=1619585878'">
                             </div>
                         </div>
                         <div class="Runes">
