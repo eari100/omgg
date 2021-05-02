@@ -73,6 +73,11 @@ public class IntegrationInfoResponseDTO {
     private String player8SummonerName;
     private String player9SummonerName;
     private String player10SummonerName;
+
+    private String mapName;
+    private String gameDurationToString;
+    private String winToString;
+    private String gameCreationToDate;
     
     @Builder
     public IntegrationInfoResponseDTO(
@@ -96,10 +101,13 @@ public class IntegrationInfoResponseDTO {
         this.id = id;
         this.gameId = gameId;
         this.queueId = queueId;
+        this.mapName = cv.convertToMapName(queueId);
         this.platformId = platformId;
         this.seasonId = seasonId;
         this.gameCreation = gameCreation;
+        this.gameCreationToDate = cv.convertToGameCreationDate(gameCreation);
         this.gameDuration = gameDuration;
+        this.gameDurationToString = cv.convertToGameDurationMinutesSeconds(gameDuration);
         this.championId = championId;
         this.championName = cv.convertToChampionName(championId);
         this.spell1Id = spell1Id;
@@ -151,5 +159,6 @@ public class IntegrationInfoResponseDTO {
         this.player9SummonerName = player9SummonerName;
         this.player10SummonerName = player10SummonerName;
         this.win = win;
+        this.winToString = cv.convertToWinString(win);
     }
 }
