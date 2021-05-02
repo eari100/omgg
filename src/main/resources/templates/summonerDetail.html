@@ -19,7 +19,6 @@
     <th:block th:if="${IntegrationInfo.size()==0}">
         <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>
     </th:block>
-
     <div class="MatchesList">
         <div th:each="matchItem : ${IntegrationInfo}" class="MatchWrap">
             <div class="GameItem" th:classappend="${matchItem.win == true ? 'Win' : 'Lose'}">
@@ -63,13 +62,13 @@
                             <span class="Assist" th:text="${matchItem.assists}">9</span>
                         </div>
                         <div class="KDARatio">
-                            <!--<span class="KDARatio ">2.86:1</span> 평점-->
+                            <span class="KDARatio " th:text="${matchItem.KDA}">2.86:1 평점</span>
                         </div>
                     </div>
                     <div class="Stats">
                         <div class="Level" th:text="'레벨'+${matchItem.champLevel}">레벨16</div>
                         <div class="CS">
-                            <span class="CS tip" th:text="${matchItem.totalMinionsKilled}+${matchItem.neutralMinionsKilled}">144 (4.8)</span> CS
+                            <span class="CS tip" th:text="${matchItem.totalMinionsKilled}+${matchItem.neutralMinionsKilled}+' '+${matchItem.csPerMinute}">144 (4.8)</span> CS
                         </div>
                     </div>
                     <div class="Items">
