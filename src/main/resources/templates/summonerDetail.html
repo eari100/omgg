@@ -65,7 +65,178 @@
                         <div class="KDARatio">
                             <!--<span class="KDARatio ">2.86:1</span> 평점-->
                         </div>
-
+                    </div>
+                    <div class="Stats">
+                        <div class="Level" th:text="'레벨'+${matchItem.champLevel}">레벨16</div>
+                        <div class="CS">
+                            <span class="CS tip" th:text="${matchItem.totalMinionsKilled}+${matchItem.neutralMinionsKilled}">144 (4.8)</span> CS
+                        </div>
+                    </div>
+                    <div class="Items">
+                        <div class="ItemList">
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item0==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item0}+'.png?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item0==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item1==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item1}+'.png?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item1==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item2==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item2}+'.png?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item2==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item6==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item6}+'.png?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item6==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item3==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item3}+'.png?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item3==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item4==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item4}+'?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item4==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                            <div class="Item">
+                                <th:block th:unless="${matchItem.item5==0}">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/item/'+${matchItem.item5}+'?image=q_auto:best&amp;v=1619585878'" class="Image tip">
+                                </th:block>
+                                <th:block th:if="${matchItem.item5==0}">
+                                    <div class="Image NoItem"></div>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="Trinket">
+                            <img src="//opgg-static.akamaized.net/images/site/summoner/icon-ward-blue.png">
+                            제어 와드 <span class="wards vision">2</span>
+                        </div>
+                    </div>
+                    <div class="FollowPlayers Names">
+                        <div class="Team">
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player1ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player1SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player2ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player2SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner Requester">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player3ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player3SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player4ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player4SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player5ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player5SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Team">
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player6ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player6SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player7ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player7SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player8ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player8SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player9ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player9SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                            <div class="Summoner ">
+                                <div class="ChampionImage">
+                                    <div class="ChampionImage">
+                                        <img th:src="'//opgg-static.akamaized.net/images/lol/champion/'+${matchItem.player10ChampionName}+'.png?image=c_scale,q_auto,w_46&amp;v=1619585878'" class="Image16 __sprite __spc16 __spc16-34 tip tpd-delegation-uid-1">
+                                    </div>
+                                </div>
+                                <div class="SummonerName" th:text="${matchItem.player10SummonerName}">
+                                    거세짱123
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
