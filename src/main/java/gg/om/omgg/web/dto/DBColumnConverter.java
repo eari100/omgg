@@ -1,11 +1,15 @@
 package gg.om.omgg.web.dto;
 
-/* https://developer.riotgames.com/docs/lol#data-dragon
- * update : v11.9.1
- */
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+// https://developer.riotgames.com/docs/lol#data-dragon
 public class DBColumnConverter {
-    
-    // http://ddragon.leagueoflegends.com/cdn/11.9.1/data/en_US/champion.json
+
+    /* http://ddragon.leagueoflegends.com/cdn/11.9.1/data/en_US/champion.json
+     * update : v11.9.1
+     */
     public String convertToChampionName(int championId) {
         String championName = "";
 
@@ -169,5 +173,31 @@ public class DBColumnConverter {
         }
 
         return championName;
+    }
+
+    // http://static.developer.riotgames.com/docs/lol/queues.json
+    public String convertToMapName(long queueId) {
+        String mapName = "";
+
+        if(queueId==420L) mapName = "솔랭";
+        else if(queueId==440L) mapName = "자유랭";
+        else if(queueId==450L) mapName = "무작위 총력전";
+        else if(queueId==1020L) mapName = "단일 챔피언";
+        else mapName = "특수 모드";
+
+        return mapName;
+    }
+
+    public String convertToGameCreationDate(long gameCreation) {
+        SimpleDateFormat sdf = new SimpleDateFormat( "yy-MM-dd" , Locale.KOREA );
+        return sdf.format(new Date(gameCreation));
+    }
+
+    public String convertToWinString(boolean win) {
+        return win ? "승리" : "패배";
+    }
+
+    public String convertToGameDurationMinutesSeconds(long gameDuration) {
+        return String.format("%d분%2d초", gameDuration/60, gameDuration%60);
     }
 }
