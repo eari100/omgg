@@ -200,4 +200,12 @@ public class DBColumnConverter {
     public String convertToGameDurationMinutesSeconds(long gameDuration) {
         return String.format("%d분%2d초", gameDuration/60, gameDuration%60);
     }
+
+    public String convertToKDA(int kills, int deaths, int assists) {
+        return deaths==0 ? "OMG !!!" : String.format("%.2f:1 평점", (float)((kills+assists)/deaths));
+    }
+
+    public String convertToCsPerMinute(int totalMinionsKilled, int neutralMinionsKilled, long gameDuration) {
+        return String.format("(%.1f)", (float)(totalMinionsKilled+neutralMinionsKilled)/(gameDuration/60));
+    }
 }
