@@ -78,6 +78,8 @@ public class IntegrationInfoResponseDTO {
     private String gameDurationToString;
     private String winToString;
     private String gameCreationToDate;
+    private String KDA;
+    private String csPerMinute;
     
     @Builder
     public IntegrationInfoResponseDTO(
@@ -160,5 +162,7 @@ public class IntegrationInfoResponseDTO {
         this.player10SummonerName = player10SummonerName;
         this.win = win;
         this.winToString = cv.convertToWinString(win);
+        this.KDA = cv.convertToKDA(kills, deaths, assists);
+        this.csPerMinute = cv.convertToCsPerMinute(totalMinionsKilled, neutralMinionsKilled, gameDuration);
     }
 }
