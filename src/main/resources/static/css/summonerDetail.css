@@ -12,6 +12,7 @@
 .GameItem>.Content>div {
     display: table-cell;
     height: 96px;
+    width: 20%;
     vertical-align: middle;
 }
 
