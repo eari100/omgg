@@ -175,6 +175,33 @@ public class DBColumnConverter {
         return championName;
     }
 
+    /* http://ddragon.leagueoflegends.com/cdn/11.9.1/data/en_US/summoner.json
+     * update : v11.9.1
+     */
+    public String convertToSpellName(int spellId) {
+        String spellName = "";
+
+        switch (spellId) {
+            case 21: spellName = "SummonerBarrier"; break;
+            case 1: spellName = "SummonerBoost"; break;
+            case 14: spellName = "SummonerDot"; break;
+            case 3: spellName = "SummonerExhaust"; break;
+            case 4: spellName = "SummonerFlash"; break;
+            case 6: spellName = "SummonerHaste"; break;
+            case 7: spellName = "SummonerHeal"; break;
+            case 13: spellName = "SummonerMana"; break;
+            case 30: spellName = "SummonerPoroRecall"; break;
+            case 31: spellName = "SummonerPoroThrow"; break;
+            case 11: spellName = "SummonerSmite"; break;
+            case 39: spellName = "SummonerSnowURFSnowball_Mark"; break;
+            case 32: spellName = "SummonerSnowball"; break;
+            case 12: spellName = "SummonerTeleport"; break;
+            default: spellName = "undefined"; break;
+        }
+
+        return spellName;
+    }
+
     // http://static.developer.riotgames.com/docs/lol/queues.json
     public String convertToMapName(long queueId) {
         String mapName = "";
