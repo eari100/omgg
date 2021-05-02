@@ -22,7 +22,9 @@ public class IntegrationInfoResponseDTO {
     // participant
     private int championId;
     private int spell1Id;
+    private String spell1Name;
     private int spell2Id;
+    private String spell2Name;
     private int item0;
     private int item1;
     private int item2;
@@ -113,7 +115,9 @@ public class IntegrationInfoResponseDTO {
         this.championId = championId;
         this.championName = cv.convertToChampionName(championId);
         this.spell1Id = spell1Id;
+        this.spell1Name = cv.convertToSpellName(spell1Id);
         this.spell2Id = spell2Id;
+        this.spell2Name = cv.convertToSpellName(spell2Id);
         this.item0 = item0;
         this.item1 = item1;
         this.item2 =item2;
