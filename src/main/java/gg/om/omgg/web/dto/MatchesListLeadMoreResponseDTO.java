@@ -16,7 +16,6 @@ public class MatchesListLeadMoreResponseDTO {
             List<Match> matchList = new ArrayList<>(summoner.getMatches());
             matchList.sort((m1, m2) -> new Match().compare(m1, m2));
             this.matches = matchList;
-            this.matches = matchList;
         }
     }
 }
