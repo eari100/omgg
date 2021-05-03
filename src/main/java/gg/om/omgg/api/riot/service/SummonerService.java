@@ -10,7 +10,6 @@ import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.IntegrationInfoResponseDTO;
-import gg.om.omgg.web.dto.MatchesListLeadMoreResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -95,18 +94,35 @@ public class SummonerService {
         Optional<MatchListDTO> matchListDTO = matchListParser.getJSONData(accountId, endIndex);
 
         if(matchListDTO.isPresent()) {
+            Optional<Summoner> findSummoner = summonerRepository.findByName(name);
+
             HashSet<Long> gameIds = matchListDTO.get().getMatches()
                     .stream()
                     .map(match->match.getGameId())
                     .collect(HashSet::new, HashSet::add, HashSet::addAll);
 
             for(long gameId:gameIds) {
+                Optional<Match> findMatch = matchRepository.findById(gameId);
                 MatchDetailParser matchDetailParser = new MatchDetailParser();
                 Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
 
-                if(matchDTO.isPresent()) {
-                    matchRepository.save(matchDTO.get().matchToEntity());
-                    participantRepository.saveAll(matchDTO.get().participantToEntity());
+                if(findMatch.isPresent()) {
+                    findSummoner.get().getMatches().add(matchDTO.get().matchToEntity());
+
+                    for(Participant participantDTO : matchDTO.get().participantToEntity()) {
+                        Optional<Participant> findParticipant = participantRepository.findById(participantDTO.getParticipantId());
+                        findParticipant.get().setAccoutId(participantDTO.getAccoutId());
+                        findParticipant.get().setSummonerId(participantDTO.getSummonerId());
+                        findParticipant.get().setSummonerName(participantDTO.getSummonerName());
+                    }
+
+                } else {
+                    if(matchDTO.isPresent()) {
+                        matchRepository.save(matchDTO.get().matchToEntity());
+                        findSummoner.get().getMatches().add(matchDTO.get().matchToEntity());
+
+                        participantRepository.saveAll(matchDTO.get().participantToEntity());
+                    }
                 }
             }
         }
