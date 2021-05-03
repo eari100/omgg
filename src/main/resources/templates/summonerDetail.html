@@ -14,7 +14,7 @@
         <input type="hidden" id="summonerId" th:value="${IntegrationInfo.get(0).id}">
         <input type="hidden" id="summonerName" th:value="${IntegrationInfo.get(0).name}">
         <h1 th:text="${IntegrationInfo.get(0).name}">김소환사</h1>
-        <button type="button" id="btn-refresh">전적갱신</button>
+        <button type="button" id="btn-refresh" class="Button SemiRound Blue">전적갱신</button>
     </th:block>
     <th:block th:if="${IntegrationInfo.size()==0}">
         <h1>OMGG에 등록되지 않은 소환사입니다. 오타를 확인 후 다시 검색해주세요.</h1>

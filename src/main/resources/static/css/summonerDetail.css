@@ -255,3 +255,18 @@
 .GameItem.Lose>.Content>.GameStats>.GameResult {
     color: #c6443e;
 }
+
+.Button.SemiRound {
+    padding: 11px 14px 10px;
+    border-radius: 2px;
+    border: none;
+    background: none;
+    font-size: 14px;
+}
+
+.Button.Blue {
+    border: 1px solid #1a78ae;
+    background: #1f8ecd;
+    color: #f2f2f2;
+}
+
