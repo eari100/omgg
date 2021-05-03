@@ -279,6 +279,6 @@ public class SummonerServiceTests {
                 .build()
         );
 
-        summonerService.matchesListLeadMore(id, accountId, 400);
+        summonerService.matchesListLeadMore(name, accountId, 400);
     }
 }
