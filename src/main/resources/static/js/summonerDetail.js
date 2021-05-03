@@ -7,7 +7,6 @@ var main = {
     },
     renewData : function() {
         var data = {
-            id: $('#summonerId').val(),
             name: $('#summonerName').val()
         }
 
