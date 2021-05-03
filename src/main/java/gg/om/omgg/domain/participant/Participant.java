@@ -3,10 +3,11 @@ package gg.om.omgg.domain.participant;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
+@Getter@Setter
 @NoArgsConstructor
 @Entity
 public class Participant {

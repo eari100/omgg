@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 import java.io.Serializable;
 import java.util.*;
 
@@ -24,7 +25,7 @@ public class Summoner implements Serializable {
     private String puuid;
     private long summonerLevel;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name="summoner_match",
             joinColumns = @JoinColumn(name="account_id", referencedColumnName="account_id"),
             inverseJoinColumns = @JoinColumn(name="game_id", referencedColumnName="game_id")

@@ -3,7 +3,9 @@ package gg.om.omgg.api.riot.service;
 import gg.om.omgg.api.riot.dto.MatchDTO;
 import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
+import gg.om.omgg.domain.match.Match;
 import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.participant.Participant;
 import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
@@ -49,14 +51,27 @@ public class SummonerService {
                                         .collect(HashSet::new, HashSet::add, HashSet::addAll);
 
                 for(long gameId:gameIds) {
+                    Optional<Match> findMatch = matchRepository.findById(gameId);
                     MatchDetailParser matchDetailParser = new MatchDetailParser();
                     Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
 
-                    if(matchDTO.isPresent()) {
-                        matchRepository.save(matchDTO.get().matchToEntity());
+                    if(findMatch.isPresent()) {
                         summoner.getMatches().add(matchDTO.get().matchToEntity());
 
-                        participantRepository.saveAll(matchDTO.get().participantToEntity());
+                        for(Participant participantDTO : matchDTO.get().participantToEntity()) {
+                            Optional<Participant> findParticipant = participantRepository.findById(participantDTO.getParticipantId());
+                            findParticipant.get().setAccoutId(participantDTO.getAccoutId());
+                            findParticipant.get().setSummonerId(participantDTO.getSummonerId());
+                            findParticipant.get().setSummonerName(participantDTO.getSummonerName());
+                        }
+
+                    } else {
+                        if(matchDTO.isPresent()) {
+                            matchRepository.save(matchDTO.get().matchToEntity());
+                            summoner.getMatches().add(matchDTO.get().matchToEntity());
+
+                            participantRepository.saveAll(matchDTO.get().participantToEntity());
+                        }
                     }
                 }
             }
