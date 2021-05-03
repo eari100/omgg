@@ -10,7 +10,7 @@ public class RenewRequestDTO {
     private String name;
 
     @Builder
-    public  RenewRequestDTO(String name) {
+    public RenewRequestDTO(String name) {
         this.name = name;
     }
 }
