@@ -13,6 +13,7 @@ var main = {
         })
     },
     findByName : function() {
+        loadingBarStart()
         var name = $('#summonerName').val()
         window.location.href = '/userName='+name
     }
