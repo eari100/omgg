@@ -5,6 +5,9 @@
     <title>OMGG</title>
 
     <link rel="stylesheet" href="css/summonerDetail.css">
+    <!--ladda-bootstrap-->
+    <link rel="stylesheet" href="dist/ladda-themeless.min.css">
+    <link rel="stylesheet" href="dist/ladda.min.css">
 </head>
 <body>
 <form>
@@ -15,7 +18,9 @@
         <input type="hidden" id="summonerName" th:value="${IntegrationInfo.get(0).name}">
         <h1 th:text="${IntegrationInfo.get(0).name}">김소환사</h1>
 
-        <button type="button" id="btn-refresh" class="Button SemiRound Blue">전적갱신</button>
+        <button id="btn-refresh" class="btn btn-primary ladda-button Button Blue" data-style="expand-right" data-size="s">
+            <span class="ladda-label">전적갱신</span>
+        </button>
 
         <div class="MatchesList">
             <div th:each="matchItem : ${IntegrationInfo}" class="MatchWrap">
@@ -27,7 +32,6 @@
                             <div class="Bar"></div>
                             <div class="GameResult" th:text="${matchItem.winToString}">승리</div>
                             <div class="GameLength" th:text="${matchItem.gameDurationToString}">30분 5초</div>
-
                         </div>
 
                         <div class="GameSettingInfo">
@@ -249,5 +253,8 @@
 </form>
 <th:block th:replace="fragment/footer :: commonFooter"></th:block>
 <script src="js/summonerDetail.js"></script>
+<!--ladda-bootstrap-->
+<script src="js/spin.js"></script>
+<script src="js/ladda.js"></script>
 </body>
 </html>

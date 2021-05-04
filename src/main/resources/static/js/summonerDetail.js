@@ -1,29 +1,35 @@
 var main = {
     init : function() {
         var _this = this
-        $('#btn-refresh').on('click', function() {
-            _this.renewData()
+
+        $('#btn-refresh').click(function(e) {
+            e.preventDefault();
+            var l = Ladda.create(this);
+            l.start()
+            l.setProgress(0.3)
+
+            var data = {
+                name: $('#summonerName').val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/renew',
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function () {
+                    l.setProgress(0.9);
+                }
+            }).done(function() {
+                window.location.href = '/userName='+data.name
+            }).fail(function(error) {
+                alert(JSON.stringify(error))
+            }).always(function() { l.stop(); });
         })
 
         $('#btn-gameMore').on('click', function() {
             _this.gameMore()
-        })
-    },
-    renewData : function() {
-        var data = {
-            name: $('#summonerName').val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/renew',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            window.location.href = '/userName='+data.name
-        }).fail(function(error) {
-            alert(JSON.stringify(error))
         })
     },
     gameMore : function() {
