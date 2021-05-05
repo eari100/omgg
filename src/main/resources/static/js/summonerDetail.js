@@ -36,6 +36,7 @@ var main = {
         var data = {
             accountId: 'yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr', // 임시 데이터
             name: $('#summonerName').val(),
+            strIndex: 200,
             endIndex: 400  // 임시 데이터
         }
 

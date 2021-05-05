@@ -24,6 +24,6 @@ public class RiotApiController {
 
     @PostMapping("/api/matchesLeadMore")
     public List<IntegrationInfoResponseDTO> selectMatchesLeadMore(@RequestBody MatchesListLeadMoreRequestDTO requestDTO) {
-        return summonerService.matchesListLeadMore(requestDTO.getName(), requestDTO.getAccountId(), requestDTO.getEndIndex());
+        return summonerService.matchesListLeadMore(requestDTO.getName(), requestDTO.getAccountId(), requestDTO.getStrIndex(), requestDTO.getEndIndex());
     }
 }

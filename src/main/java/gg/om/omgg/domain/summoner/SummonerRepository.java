@@ -46,16 +46,16 @@ public interface SummonerRepository extends JpaRepository<Summoner, String>, Sum
             "from summoner s  " +
             "left outer join summoner_match sm " +
             "on s.account_id = sm.account_id " +
-            "left outer join match m " +
+            "left outer join game_match m " +
             "on sm.game_id = m.game_id " +
             "left outer join participant p " +
             "on m.game_id = p.game_id " +
             "where s.name = :name " +
-            "limit :endIndex-200, :endIndex " +
+            "limit :strIndex, :endIndex " +
             ") x inner join participant mp " +
             "on x.m_game_id = mp.game_id " +
             "and mp.summoner_name = :name " +
             "group by x.m_game_id " +
             "order by x.m_game_id desc ", nativeQuery = true)
-    List<Object[]> findIntegrationInfoByName(@Param("name") String summonerName, @Param("endIndex") int endIndex);
+    List<Object[]> findIntegrationInfoByName(@Param("name") String summonerName, @Param("strIndex") int strIndex, @Param("endIndex") int endIndex);
 }

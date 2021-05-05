@@ -408,7 +408,7 @@ public class SummonerRepositoryTests {
         // summoner_match 데이터 삽입
         summonerRepository.save(summoner);
 
-        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 0,200);
         List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
         
         for(Object[] obj : result) {
@@ -484,7 +484,7 @@ public class SummonerRepositoryTests {
     @Test
     public void 데이터가_존재하지_않는_findIntegrationInfoByName_조회테스트() {
         String name = "거세짱123";
-        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 0,200);
         List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
 
         for(Object[] obj : result) {

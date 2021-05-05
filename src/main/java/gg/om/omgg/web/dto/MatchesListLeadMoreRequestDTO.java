@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 public class MatchesListLeadMoreRequestDTO {
     private String accountId;
     private String name;
+    private int strIndex;
     private int endIndex;
 }

@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name="game_match")
 public class Match implements Comparator<Match> {
     @Id
     @Column(name="game_id")

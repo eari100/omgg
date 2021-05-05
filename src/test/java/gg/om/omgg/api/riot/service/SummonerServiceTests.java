@@ -64,7 +64,7 @@ public class SummonerServiceTests {
         );
         summonerService.renewData(name);
 
-        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 0,200);
         List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
 
         for(Object[] obj : result) {
@@ -140,7 +140,7 @@ public class SummonerServiceTests {
         String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
         summonerService.renewData(name);
 
-        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 200);
+        List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 0,200);
         List<IntegrationInfoResponseDTO> dtoList = new ArrayList<>();
 
         for(Object[] obj : result) {
@@ -279,6 +279,6 @@ public class SummonerServiceTests {
                 .build()
         );
 
-        summonerService.matchesListLeadMore(name, accountId, 400);
+        summonerService.matchesListLeadMore(name, accountId, 200, 400);
     }
 }
