@@ -1,0 +1,30 @@
+.index-logo img {
+    display: block;
+    max-height: 200px;
+    margin: 0 auto;
+}
+
+.summoner-search-form__text {
+    display: block;
+    width: 40%;
+    margin: 0 auto;
+    padding: 15px 150px 18px 17px;
+    background-color: #e3e3e3;
+    border: none;
+    line-height: 17px;
+    font-size: 14px;
+    color: #9b9b9b;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 19%);
+}
+
+.fa, .fab, .fad, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
