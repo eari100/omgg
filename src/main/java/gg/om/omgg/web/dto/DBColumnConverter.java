@@ -207,6 +207,7 @@ public class DBColumnConverter {
         String mapName = "";
 
         if(queueId==420L) mapName = "솔랭";
+        else if(queueId==430L) mapName = "일반";
         else if(queueId==440L) mapName = "자유랭";
         else if(queueId==450L) mapName = "무작위 총력전";
         else if(queueId==1020L) mapName = "단일 챔피언";
