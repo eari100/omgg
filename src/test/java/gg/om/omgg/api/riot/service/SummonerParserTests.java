@@ -1,6 +1,7 @@
 package gg.om.omgg.api.riot.service;
 
 import gg.om.omgg.api.riot.dto.SummonerDTO;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -8,8 +9,19 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SummonerParserTests {
+
+    @Before
+    public void 시간지연() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
+
     @Test
     public void httpclient_적용_테스트() {
+
         SummonerParser parser = new SummonerParser();
         Optional<SummonerDTO> dto = parser.getJSONData("거세짱123");
 

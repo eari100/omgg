@@ -3,6 +3,7 @@ package gg.om.omgg.domain.participant;
 import gg.om.omgg.domain.match.Match;
 import gg.om.omgg.domain.match.MatchRepository;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,15 @@ public class ParticipantRepositoryTests {
 
     @Autowired
     ParticipantRepository participantRepository;
+
+    @Before
+    public void 시간지연() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
 
     @After
     public void cleanUp() {

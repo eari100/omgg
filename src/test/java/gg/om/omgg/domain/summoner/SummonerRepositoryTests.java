@@ -8,6 +8,7 @@ import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.web.dto.IntegrationInfoResponseDTO;
 import gg.om.omgg.web.dto.SummonerIntegrationInformationResponseDTO;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,15 @@ public class SummonerRepositoryTests {
     MatchRepository matchRepository;
     @Autowired
     ParticipantRepository participantRepository;
+
+    @Before
+    public void 시간지연() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
 
     @After
     public void cleanUp() {
@@ -413,61 +423,61 @@ public class SummonerRepositoryTests {
         
         for(Object[] obj : result) {
             dtoList.add(
-                IntegrationInfoResponseDTO.builder()
-                        .profileIconId((int)obj[0])
-                        .name((String)obj[1])
-                        .summonerLevel(((Number)obj[2]).longValue())
-                        .id((String)obj[3])
+                    IntegrationInfoResponseDTO.builder()
+                            .profileIconId(Integer.parseInt(String.valueOf(obj[0])))
+                            .name((String)obj[1])
+                            .summonerLevel(((Number)obj[2]).longValue())
+                            .id((String)obj[3])
 
-                        .gameId(((Number)obj[4]).longValue())
-                        .queueId((int)obj[5])
-                        .platformId((String)obj[6])
-                        .seasonId((int)obj[7])
-                        .gameCreation(((Number)obj[8]).longValue())
-                        .gameDuration(((Number)obj[9]).longValue())
+                            .gameId(((Number)obj[4]).longValue())
+                            .queueId(Integer.parseInt(String.valueOf(obj[5])))
+                            .platformId((String)obj[6])
+                            .seasonId(Integer.parseInt(String.valueOf(obj[7])))
+                            .gameCreation(((Number)obj[8]).longValue())
+                            .gameDuration(((Number)obj[9]).longValue())
 
-                        .championId((int)obj[10])
-                        .spell1Id((int)obj[11])
-                        .spell2Id((int)obj[12])
-                        .item0((int)obj[13])
-                        .item1((int)obj[14])
-                        .item2((int)obj[15])
-                        .item3((int)obj[16])
-                        .item4((int)obj[17])
-                        .item5((int)obj[18])
-                        .item6((int)obj[19])
-                        .kills((int)obj[20])
-                        .deaths((int)obj[21])
-                        .assists((int)obj[22])
-                        .perk0((int)obj[23])
-                        .perkSubStyle((int)obj[24])
-                        .champLevel((int)obj[25])
-                        .totalMinionsKilled((int)obj[26])
-                        .neutralMinionsKilled((int)obj[27])
-                        .visionWardsBoughtInGame((int)obj[28])
+                            .championId(Integer.parseInt(String.valueOf(obj[10])))
+                            .spell1Id(Integer.parseInt(String.valueOf(obj[11])))
+                            .spell2Id(Integer.parseInt(String.valueOf(obj[12])))
+                            .item0(Integer.parseInt(String.valueOf(obj[13])))
+                            .item1(Integer.parseInt(String.valueOf(obj[14])))
+                            .item2(Integer.parseInt(String.valueOf(obj[15])))
+                            .item3(Integer.parseInt(String.valueOf(obj[16])))
+                            .item4(Integer.parseInt(String.valueOf(obj[17])))
+                            .item5(Integer.parseInt(String.valueOf(obj[18])))
+                            .item6(Integer.parseInt(String.valueOf(obj[19])))
+                            .kills(Integer.parseInt(String.valueOf(obj[20])))
+                            .deaths(Integer.parseInt(String.valueOf(obj[21])))
+                            .assists(Integer.parseInt(String.valueOf(obj[22])))
+                            .perk0(Integer.parseInt(String.valueOf(obj[23])))
+                            .perkSubStyle(Integer.parseInt(String.valueOf(obj[24])))
+                            .champLevel(Integer.parseInt(String.valueOf(obj[25])))
+                            .totalMinionsKilled(Integer.parseInt(String.valueOf(obj[26])))
+                            .neutralMinionsKilled(Integer.parseInt(String.valueOf(obj[27])))
+                            .visionWardsBoughtInGame(Integer.parseInt(String.valueOf(obj[28])))
 
-                        .player1ChampionId((int)obj[29])
-                        .player2ChampionId((int)obj[30])
-                        .player3ChampionId((int)obj[31])
-                        .player4ChampionId((int)obj[32])
-                        .player5ChampionId((int)obj[33])
-                        .player6ChampionId((int)obj[34])
-                        .player7ChampionId((int)obj[35])
-                        .player8ChampionId((int)obj[36])
-                        .player9ChampionId((int)obj[37])
-                        .player10ChampionId((int)obj[38])
-                        .player1SummonerName((String)obj[39])
-                        .player2SummonerName((String)obj[40])
-                        .player3SummonerName((String)obj[41])
-                        .player4SummonerName((String)obj[42])
-                        .player5SummonerName((String)obj[43])
-                        .player6SummonerName((String)obj[44])
-                        .player7SummonerName((String)obj[45])
-                        .player8SummonerName((String)obj[46])
-                        .player9SummonerName((String)obj[47])
-                        .player10SummonerName((String)obj[48])
-                        .win((boolean)obj[49])
-                        .build()
+                            .player1ChampionId(Integer.parseInt(String.valueOf(obj[29])))
+                            .player2ChampionId(Integer.parseInt(String.valueOf(obj[30])))
+                            .player3ChampionId(Integer.parseInt(String.valueOf(obj[31])))
+                            .player4ChampionId(Integer.parseInt(String.valueOf(obj[32])))
+                            .player5ChampionId(Integer.parseInt(String.valueOf(obj[33])))
+                            .player6ChampionId(Integer.parseInt(String.valueOf(obj[34])))
+                            .player7ChampionId(Integer.parseInt(String.valueOf(obj[35])))
+                            .player8ChampionId(Integer.parseInt(String.valueOf(obj[36])))
+                            .player9ChampionId(Integer.parseInt(String.valueOf(obj[37])))
+                            .player10ChampionId(Integer.parseInt(String.valueOf(obj[38])))
+                            .player1SummonerName((String)obj[39])
+                            .player2SummonerName((String)obj[40])
+                            .player3SummonerName((String)obj[41])
+                            .player4SummonerName((String)obj[42])
+                            .player5SummonerName((String)obj[43])
+                            .player6SummonerName((String)obj[44])
+                            .player7SummonerName((String)obj[45])
+                            .player8SummonerName((String)obj[46])
+                            .player9SummonerName((String)obj[47])
+                            .player10SummonerName((String)obj[48])
+                            .win((boolean)obj[49])
+                            .build()
             );
         }
 
