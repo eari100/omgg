@@ -1,9 +1,6 @@
 var main = {
     init : function() {
         var _this = this
-        $('#btn-find').on('click', function() {
-            _this.findByName()
-        })
 
         $('#summonerName').keydown(function(key) {
             if (key.keyCode == 13) {
