@@ -1,9 +1,12 @@
 package gg.om.omgg.web;
 
+import gg.om.omgg.domain.match.MatchRepository;
+import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
 import gg.om.omgg.web.dto.RenewRequestDTO;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +34,25 @@ public class RiotApiControllerTests {
 
     @Autowired
     private SummonerRepository summonerRepository;
+    @Autowired
+    MatchRepository matchRepository;
+    @Autowired
+    ParticipantRepository participantRepository;
+
+    @Before
+    public void 시간지연() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
 
     @After
     public void tearDown() throws Exception {
         summonerRepository.deleteAll();
+        participantRepository.deleteAll();
+        matchRepository.deleteAll();
     }
 
     @Test
