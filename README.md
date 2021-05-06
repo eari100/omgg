@@ -1,5 +1,7 @@
 # omgg
 
+![메인화면-검색-시연](https://user-images.githubusercontent.com/24715292/117240401-afda8700-ae6b-11eb-8739-304838e1ddec.gif)
+
 omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 웹사이트입니다.
 
 ## Environment
