@@ -21,6 +21,7 @@ omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 �
 
 + spring data jpa 2.3.7
 + QueryDSL 4.3.1
++ junit 4.13.1
 + jackson 2.11.3
 + apache httpcomponents httpclient 4.5.13
 
