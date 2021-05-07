@@ -1,20 +1,24 @@
 # omgg
 
+[![EC2 Status](https://img.shields.io/badge/EC2-success-blue?logo=Amazon%20AWS&style=for-the-badge)](https://aws.amazon.com/ko/ec2/?nc2=type_a&ec2-whats-new.sort-by=item.additionalFields.postDateTime&ec2-whats-new.sort-order=desc)
+[![RDS DBMS engine](https://img.shields.io/badge/RDS-MySQL-9cf?logo=Amazon%20AWS&style=for-the-badge)](https://aws.amazon.com/ko/rds/?nc2=type_a)
+
 ![메인화면-검색-시연](https://user-images.githubusercontent.com/24715292/117240401-afda8700-ae6b-11eb-8739-304838e1ddec.gif)
 
-omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 웹사이트입니다.
+omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 웹사이트입니다.  
+이 [링크](http://ec2-18-116-207-31.us-east-2.compute.amazonaws.com:8080)에서직접 확인해보세요!
 
 ## Environment
 
 + JDK 11.0.6
 + Spring boot 2.3.7.RELEASE
-+ MySQL 5.7.23
++ gradle 6.7.1
++ MySQL 8.0.20
 
 ## Library used
 
 ### back-end
 
-+ gradle 6.7.1
 + spring data jpa 2.3.7
 + QueryDSL 4.3.1
 + jackson 2.11.3
