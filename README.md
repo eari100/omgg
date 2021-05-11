@@ -23,6 +23,46 @@ omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 �
 > git clone https://github.com/eari100/omgg.git
 ```
 
+### application.yml
+
+`omgg/src/main/resources/` 경로에 application.yml 파일을 만들고 아래와 같이 작성합니다.
+
+```yml
+spring:
+  profiles:
+    active: dev-h2
+
+---
+
+spring:
+  profiles: dev-h2
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+  h2:
+    console:
+      enabled: true
+  livereload:
+    enabled: true
+  thymeleaf:
+    cache: false
+
+dialect: MySQL5InnoDBDialect
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+```
+
 ### Riot API key 발급 받기
 
 전적 데이터는 라이엇에서 제공하는 REST API를 이용하여 데이터를 가져옵니다.   
