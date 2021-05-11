@@ -74,20 +74,21 @@ public class Key {
 }
 ```
 
-### Build
+## Run
+
+```bash
+> ./gradlew bootRun
+```
+localhost:8080으로 접속 가능합니다.
+
+## Build & Deploy
 
 ```bash
 > cd omgg
 > ./gradlew build
-```
-
-### Deploy
-
-```bash
-> cd build/libs
+> > cd build/libs
 > java -jar omgg-0.0.1-SNAPSHOT.jar
 ```
-locolhost:8080으로 접속 가능합니다.
 
 ## Library used
 
