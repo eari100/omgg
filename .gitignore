@@ -7,7 +7,7 @@ build/
 ### Riot api key ###
 **/src/main/java/gg/om/omgg/api/riot/Key.java
 ### 운영 DBMS 정보 ###
-**/src/main/resources/prod-application.yml
+**/src/main/resources/application-prod.yml
 
 ### STS ###
 .apt_generated
