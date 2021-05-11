@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 ### Riot api key ###
 **/src/main/java/gg/om/omgg/api/riot/Key.java
+**/src/main/resources/application.yml
 
 ### STS ###
 .apt_generated
