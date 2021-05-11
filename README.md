@@ -55,6 +55,19 @@ Development API Key를 사용해도 문제는 없으나 24시간마다 발급받
 
 ![API-key-issued-06](https://user-images.githubusercontent.com/24715292/117747700-9e1d2900-b249-11eb-9b78-d924533f4b0c.png)
 
+### Key.java 작성하기
+
+등록 받은 API KEY를 사용하는 Key 클래스를 작성해주면 소스코드 내에서 Riot REST API를 사용할 준비가 끝납니다.
+
+```JAVA
+package gg.om.omgg.api.riot;
+
+public class Key {
+    public static final String api_key = "(발급받은 키)";
+
+}
+```
+
 ## Library used
 
 ### back-end
