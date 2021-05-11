@@ -17,6 +17,8 @@ omgg는 리그 오브 레전드의 전적 검색 데이터를 제공해주는 �
 
 ## Installation
 
+### Source Download
+
 ```bash
 > git clone https://github.com/eari100/omgg.git
 ```
