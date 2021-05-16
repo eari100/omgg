@@ -23,12 +23,12 @@ public class SummonerParserTests {
     public void httpclient_적용_테스트() {
 
         SummonerParser parser = new SummonerParser();
-        Optional<SummonerDTO> dto = parser.getJSONData("거세짱123");
+        Optional<SummonerDTO> dto = parser.getJSONData("디아블로한다");
 
-        assertThat(dto.get().getName()).isEqualTo("거세짱123");
-        assertThat(dto.get().getId()).isEqualTo("qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI");
-        assertThat(dto.get().getAccountId()).isEqualTo("yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr");
-        assertThat(dto.get().getPuuid()).isEqualTo("blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ");
+        assertThat(dto.get().getName()).isEqualTo("디아블로한다");
+        assertThat(dto.get().getId()).isEqualTo("SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w");
+        assertThat(dto.get().getAccountId()).isEqualTo("rbNJhW3DdOJ_6pQtyFMOMOvpO20qHDSFbj_pKvxckH8");
+        assertThat(dto.get().getPuuid()).isEqualTo("gMPAG5C3sFtOyfn058rTaR86Ha78nQlZHJF0jEOIOozDLO-uTIa9QqcRK6e0uqXeHk9lLxw0Lra_gg");
         // 아이콘
         //assertThat(dto.get().getProfileIconId()).isEqualTo(11);
         //assertThat(dto.get().getRevisionDate()).isEqualTo(1609294136000L);

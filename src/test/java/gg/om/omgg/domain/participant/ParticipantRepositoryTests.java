@@ -84,7 +84,7 @@ public class ParticipantRepositoryTests {
                 "gg_KK6R6lbQFLVT81HgoJslHjJ5luxMLFeESgvTYt5me", "8jWj2lLvs5ijQiJHpTAYVEl8cKEjNdHdEV7AAiguMf6UJhI", "_jKuGjotrfp-Q0Bk83Y3Iyxs9e4P96BFjD8xLF2wAUVxk-Q",
                 "OMt_JGZCTrUIq0lCzOtbptboWK6ebJs-vJiqkDjDhZ9p", "1PGAJqehSvcIxnog4jePhoEOlpZZbtF7169qw95AL08", "7aUeEN0eFHYG0XCrDaDaYamhjXidpwfIBVZQjznKDbu4iVcfgROaZfuQ",
                 "BGuEVk-8SNN5FkhBkqk8vMv4hHqPerU71mLw1l35n9JXdKrze9DdqGe-", "KNrfGudz2T1GqsafokjuvjNuu_U4X5jW1xftqqGqnZ1M95JRIi6qbpdF"};
-        String[] summonerNames = {"아나스타샤르", "Maxim Chu", "거세짱123", "양스나", "육세웅15", "DNA Genius", "솔렘니스", "Cylvestrian", "엔젤정원", "고인남욱몽"};
+        String[] summonerNames = {"아나스타샤르", "Maxim Chu", "디아블로한다", "양스나", "육세웅15", "DNA Genius", "솔렘니스", "Cylvestrian", "엔젤정원", "고인남욱몽"};
         String[] summonerIds = {"nV3yU54l6-p23lTmHwE0Byh8u4egDMWB0VZgVH-KBODhm4o", "3xJRvpAzz8DCrl68y6_Pe4ih4F4HPKLXvjOFLRdZs2H3xXc",
                 "H9h7OYqErUcfzYNV9TYDyPyIlmP3P6KihCztidNhTcyxxHs", "by5pAc9A9aWsb6vaRZEbUtSuQMpr5cGJl-DUXvS8uWWhklE", "Fa-NvjjixlevSqN5dfqC_LNS-RgEvcAUf7fco0qvKdIl7gc",
                 "kdpMk97BRlWxo1XxvcnxpXYFx7Ud2dBKPnKZRTkXmqO8bA", "R2CG5kVuifWF-080i6Qd3JD4G8TnZ931gDC4p6cAggNR4A", "kB7fd-D3zbbweFEzSF2M8v4H5dcbNxdeAuqA6V1_BfsuFTo",

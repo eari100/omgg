@@ -57,12 +57,12 @@ public class RiotApiControllerTests {
 
     @Test
     public void summoner_갱신() throws Exception {
-        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        String accountId = "rbNJhW3DdOJ_6pQtyFMOMOvpO20qHDSFbj_pKvxckH8";
         int profileIconId = 11;
         long revisionDate = 1609294136000L;
-        String name = "거세짱123";
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        String name = "디아블로한다";
+        String id = "SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w";
+        String puuid = "gMPAG5C3sFtOyfn058rTaR86Ha78nQlZHJF0jEOIOozDLO-uTIa9QqcRK6e0uqXeHk9lLxw0Lra_gg";
         long summonerLevel = 290L;
 
         long[] gameIds = {

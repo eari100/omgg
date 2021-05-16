@@ -54,12 +54,12 @@ public class SummonerServiceTests {
 
     @Test
     public void 소환사가_라이엇서버존재O_DB존재O_할때_소환사정보갱신() {
-        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        String accountId = "rbNJhW3DdOJ_6pQtyFMOMOvpO20qHDSFbj_pKvxckH8";
         int profileIconId = 11;
         long revisionDate = 1609294136000L;
-        String name = "거세짱123";
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        String name = "디아블로한다";
+        String id = "SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w";
+        String puuid = "gMPAG5C3sFtOyfn058rTaR86Ha78nQlZHJF0jEOIOozDLO-uTIa9QqcRK6e0uqXeHk9lLxw0Lra_gg";
         long summonerLevel = 293L;
 
         summonerRepository.save(Summoner.builder()
@@ -146,7 +146,7 @@ public class SummonerServiceTests {
 
     @Test
     public void 소환사가_라이엇서버존재O_DB존재X_할때_소환사정보갱신() {
-        String name = "거세짱123";
+        String name = "디아블로한다";
         summonerService.renewData(name);
 
         List<Object[]> result = summonerRepository.findIntegrationInfoByName(name, 0,200);
@@ -221,13 +221,13 @@ public class SummonerServiceTests {
 
     @Test
     public void 소환사가_라이엇서버존재X_DB존재O_할때_소환사정보갱신() {
-        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        String accountId = "rbNJhW3DdOJ_6pQtyFMOMOvpO20qHDSFbj_pKvxckH8";
         int profileIconId = 11;
         long revisionDate = 1609294136000L;
         // 존재하지 않는 소환사명
         String name = "거세짱황제맨";
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        String id = "SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w";
+        String puuid = "gMPAG5C3sFtOyfn058rTaR86Ha78nQlZHJF0jEOIOozDLO-uTIa9QqcRK6e0uqXeHk9lLxw0Lra_gg";
         long summonerLevel = 293L;
 
         summonerRepository.save(Summoner.builder()
@@ -259,7 +259,7 @@ public class SummonerServiceTests {
         // 존재하지 않는 소환사명
         String name = "거세짱황제맨";
         // 존재하지 않는 ID
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI-xxxxxxx";
+        String id = "SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w-xxxxxxx";
 
         summonerService.renewData(name);
 
@@ -269,12 +269,12 @@ public class SummonerServiceTests {
 
     @Test
     public void matchesList_더보기() {
-        String accountId = "yy15F-qXoM8a1kqFL8iJ0xMUTF6e6ZZlWKPdlrvgZIcr";
+        String accountId = "rbNJhW3DdOJ_6pQtyFMOMOvpO20qHDSFbj_pKvxckH8";
         int profileIconId = 11;
         long revisionDate = 1609294136000L;
-        String name = "거세짱123";
-        String id = "qOshc-BI3WAaQuvgpPI7GY7w0ZfjTt2WJHX_46zdQVqotlI";
-        String puuid = "blugvIvgoZB2GPmLQryiiVl_61CnLNNf50b_UGKkCqilTFa42mL_ZEfSEUJTICP_X-n6xuMjMg65YQ";
+        String name = "디아블로한다";
+        String id = "SLLwPTSZ7Qk88Z0ONNNww04gv94F9Sby2XK4cPocWvXo7w";
+        String puuid = "gMPAG5C3sFtOyfn058rTaR86Ha78nQlZHJF0jEOIOozDLO-uTIa9QqcRK6e0uqXeHk9lLxw0Lra_gg";
         long summonerLevel = 293L;
 
         summonerRepository.save(Summoner.builder()
