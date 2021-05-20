@@ -55,14 +55,8 @@ public class SummonerService {
                     Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
 
                     if(findMatch.isPresent()) {
+                        // 아래 작성된 summonerRepository.save로 인해 해당 코드가 없으면 데이터 삭제가 일어납니다.
                         summoner.getMatches().add(matchDTO.get().matchToEntity());
-
-                        for(Participant participantDTO : matchDTO.get().participantToEntity()) {
-                            Optional<Participant> findParticipant = participantRepository.findById(participantDTO.getParticipantId());
-                            findParticipant.get().setAccoutId(participantDTO.getAccoutId());
-                            findParticipant.get().setSummonerId(participantDTO.getSummonerId());
-                            findParticipant.get().setSummonerName(participantDTO.getSummonerName());
-                        }
 
                     } else {
                         if(matchDTO.isPresent()) {
@@ -107,14 +101,8 @@ public class SummonerService {
                 Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
 
                 if(findMatch.isPresent()) {
+                    // 아래 작성된 summonerRepository.save로 인해 해당 코드가 없으면 데이터 삭제가 일어납니다.
                     findSummoner.get().getMatches().add(matchDTO.get().matchToEntity());
-
-                    for(Participant participantDTO : matchDTO.get().participantToEntity()) {
-                        Optional<Participant> findParticipant = participantRepository.findById(participantDTO.getParticipantId());
-                        findParticipant.get().setAccoutId(participantDTO.getAccoutId());
-                        findParticipant.get().setSummonerId(participantDTO.getSummonerId());
-                        findParticipant.get().setSummonerName(participantDTO.getSummonerName());
-                    }
 
                 } else {
                     if(matchDTO.isPresent()) {
