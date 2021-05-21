@@ -5,7 +5,6 @@ import gg.om.omgg.api.riot.dto.MatchListDTO;
 import gg.om.omgg.api.riot.dto.SummonerDTO;
 import gg.om.omgg.domain.match.Match;
 import gg.om.omgg.domain.match.MatchRepository;
-import gg.om.omgg.domain.participant.Participant;
 import gg.om.omgg.domain.participant.ParticipantRepository;
 import gg.om.omgg.domain.summoner.Summoner;
 import gg.om.omgg.domain.summoner.SummonerRepository;
