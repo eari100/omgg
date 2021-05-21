@@ -22,7 +22,7 @@ var main = {
                     l.setProgress(0.9);
                 }
             }).done(function() {
-                window.location.href = '/userName='+data.name
+                location.reload(true)
             }).fail(function(error) {
                 alert(JSON.stringify(error))
             }).always(function() { l.stop(); });
