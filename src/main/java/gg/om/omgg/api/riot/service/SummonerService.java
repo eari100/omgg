@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -48,10 +49,15 @@ public class SummonerService {
                                         .map(match->match.getGameId())
                                         .collect(HashSet::new, HashSet::add, HashSet::addAll);
 
-                for(long gameId:gameIds) {
-                    Optional<Match> findMatch = matchRepository.findById(gameId);
-                    MatchDetailParser matchDetailParser = new MatchDetailParser();
-                    Optional<MatchDTO> matchDTO = matchDetailParser.getJSONData(gameId);
+                MatchDetailParser matchDetailParser = new MatchDetailParser();
+
+                Set<Optional<MatchDTO>> matchDTOSet = gameIds.stream()
+                    .parallel()
+                    .map(gameId->matchDetailParser.getJSONData(gameId))
+                    .collect(Collectors.toSet());
+
+                for(Optional<MatchDTO> matchDTO:matchDTOSet) {
+                    Optional<Match> findMatch = matchRepository.findById(matchDTO.get().getGameId());
 
                     if(findMatch.isPresent()) {
                         // 아래 작성된 summonerRepository.save로 인해 해당 코드가 없으면 데이터 삭제가 일어납니다.
