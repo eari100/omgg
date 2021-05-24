@@ -39,7 +39,7 @@ public class SummonerServiceTests {
     @Before
     public void 시간지연() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             System.err.format("IOException: %s%n", e);
         }
